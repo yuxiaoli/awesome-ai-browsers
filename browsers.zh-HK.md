@@ -2,7 +2,7 @@
 
 <p align="center"><a href="https://awesome.re"><img src="https://awesome.re/badge-flat2.svg" alt="Awesome"></a></p>
 
-[English](browsers.en.md) | [简体中文](browsers.zh-CN.md) | **繁體中文（香港）**
+[English](README.md) | [简体中文](browsers.zh-CN.md) | **繁體中文（香港）**
 
 ## 瀏覽器
 
@@ -11,7 +11,6 @@
 - [chrome-devtools-mcp](https://github.com/ChromeDevTools/chrome-devtools-mcp) - 為編程智能體提供的 Chrome DevTools
 - [playwright-mcp](https://github.com/microsoft/playwright-mcp) - Playwright MCP 伺服器
 - [browser-use](https://github.com/browser-use/browser-use) - 使用瀏覽器的智能體。
-- OpenAI Atlas
 - [steel-browser](https://github.com/steel-dev/steel-browser) - 🔥 為 AI 智能體及應用而設的開源瀏覽器 API。Steel Browser 是一個開箱即用的瀏覽器沙盒，讓你無需擔心基礎設施即可自動化網頁。
 - [stagehand](https://github.com/browserbase/stagehand) - 用於擷取資料並與網絡上任何網站互動的 SDK。可配合 Claude Code、Codex、Eve、Mastra 等使用。
 - [skyvern](https://github.com/Skyvern-AI/skyvern) - 使用 AI 自動化基於瀏覽器的工作流程
@@ -25,7 +24,6 @@
 - [browser](https://github.com/lightpanda-io/browser) - Lightpanda：為 AI 與自動化而設計的無頭瀏覽器
 - [bb-browser](https://github.com/epiral/bb-browser) - 你的瀏覽器就是 API。為 AI 智能體提供 CLI + MCP 伺服器，讓其以你的登入狀態控制 Chrome。
 - [pinchtab](https://github.com/pinchtab/pinchtab) - 高效能的瀏覽器自動化橋接與多實例編排器，具備進階隱身注入與即時儀表板。
-- Browser Use CLI
 - [carbonyl](https://github.com/fathyb/carbonyl) - 在終端機裡運行的 Chromium
 - [web-access](https://github.com/eze-is/web-access) - 為 Claude Code 裝上完整聯網能力的 skill：三層通道調度 + 瀏覽器 CDP + 並行分治
 - [browser-harness](https://github.com/browser-use/browser-harness) - Browser Harness | 自癒式框架，讓 LLM 能夠完成任何任務。

@@ -11,7 +11,6 @@ Browser automation tools, MCP servers, and AI-powered browsers for agentic web w
 - [chrome-devtools-mcp](https://github.com/ChromeDevTools/chrome-devtools-mcp) - Chrome DevTools for coding agents
 - [playwright-mcp](https://github.com/microsoft/playwright-mcp) - Playwright MCP server
 - [browser-use](https://github.com/browser-use/browser-use) - Agents that use the browser.
-- OpenAI Atlas
 - [steel-browser](https://github.com/steel-dev/steel-browser) - 🔥 Open Source Browser API for AI Agents & Apps. Steel Browser is a batteries-included browser sandbox that lets you automate the web without worrying about infrastructure.
 - [stagehand](https://github.com/browserbase/stagehand) - The SDK to extract data and interact with any site on the web. Get started with Claude Code, Codex, Eve, Mastra, and more.
 - [skyvern](https://github.com/Skyvern-AI/skyvern) - Automate browser based workflows with AI
@@ -25,7 +24,6 @@ Browser automation tools, MCP servers, and AI-powered browsers for agentic web w
 - [browser](https://github.com/lightpanda-io/browser) - Lightpanda: the headless browser designed for AI and automation
 - [bb-browser](https://github.com/epiral/bb-browser) - Your browser is the API. CLI + MCP server for AI agents to control Chrome with your login state.
 - [pinchtab](https://github.com/pinchtab/pinchtab) - High-performance browser automation bridge and multi-instance orchestrator with advanced stealth injection and real-time dashboard.
-- Browser Use CLI
 - [carbonyl](https://github.com/fathyb/carbonyl) - Chromium running inside your terminal
 - [web-access](https://github.com/eze-is/web-access) - 给 Claude Code 装上完整联网能力的 skill：三层通道调度 + 浏览器 CDP + 并行分治
 - [browser-harness](https://github.com/browser-use/browser-harness) - Browser Harness | Self-healing harness that enables LLMs to complete any task.
