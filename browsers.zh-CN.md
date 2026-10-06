@@ -6,6 +6,8 @@
 
 ## 浏览器
 
+面向 AI 智能体的浏览器自动化工具、MCP 服务器和 AI 驱动浏览器。
+
 - [chrome-devtools-mcp](https://github.com/ChromeDevTools/chrome-devtools-mcp) - 面向编程智能体的 Chrome DevTools
 - [playwright-mcp](https://github.com/microsoft/playwright-mcp) - Playwright MCP 服务器
 - [browser-use](https://github.com/browser-use/browser-use) - 使用浏览器的智能体。

@@ -6,6 +6,8 @@
 
 ## browsers
 
+Browser automation tools, MCP servers, and AI-powered browsers for agentic web workflows.
+
 - [chrome-devtools-mcp](https://github.com/ChromeDevTools/chrome-devtools-mcp) - Chrome DevTools for coding agents
 - [playwright-mcp](https://github.com/microsoft/playwright-mcp) - Playwright MCP server
 - [browser-use](https://github.com/browser-use/browser-use) - Agents that use the browser.
