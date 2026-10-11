@@ -2,7 +2,7 @@
 
 <p align="center"><a href="https://awesome.re"><img src="https://awesome.re/badge-flat2.svg" alt="Awesome"></a></p>
 
-**English** | [简体中文](README.zh-CN.md) | [繁體中文（香港）](README.zh-HK.md)
+**English** | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-HK.md)
 
 ## browsers
 

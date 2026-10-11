@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A considered collection of tools, references, and resources for curious builders.">
+  <meta name="color-scheme" content="light">
+  <title>Browsers</title>
+  <style>
+    :root { --paper:#f7f6f3; --surface:#fff; --ink:#282b27; --muted:#686c62; --line:#eaeaea; --sage:#edf3ec; --yellow:#fbf3db; --blue:#e1f3fe; --rose:#fdebec; --sans:'SF Pro Display','Helvetica Neue',Arial,sans-serif; --serif:'Lyon Text','Newsreader',Georgia,serif; --mono:'SF Mono',Consolas,monospace; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:28px; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:15px/1.6 var(--sans); -webkit-font-smoothing:antialiased; }
+    button,input,select { font:inherit; }
+    button,a,input,select,summary { -webkit-tap-highlight-color:transparent; }
+    button { cursor:pointer; }
+    a { color:inherit; text-decoration:none; }
+    button { color:inherit; }
+    button:active { transform:scale(.98); }
+    :focus-visible { outline:2px solid #51644e; outline-offset:5px; }
+    [hidden] { display:none !important; }
+    ::selection { background:#dce6d5; }
+    .wrap { width:min(1320px,calc(100% - 112px)); margin-inline:auto; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    .skip { position:fixed; left:20px; top:-70px; z-index:20; padding:12px 20px; background:var(--ink); color:#fff; }
+    .skip:focus { top:12px; }
+    .masthead { min-height:103px; display:flex; align-items:center; justify-content:space-between; gap:28px; border-bottom:1px solid var(--line); }
+    .brand { display:flex; align-items:center; gap:12px; font-size:25px; font-weight:650; letter-spacing:-1.2px; }
+    .brand svg { width:29px; height:29px; }
+    .brand-dot { color:#8a9b7c; }
+    .header-links { display:flex; align-items:center; gap:32px; font-size:13px; }
+    .header-links>a { color:var(--muted); }
+    .header-links>a:hover { color:var(--ink); }
+    .locale-wrap { display:flex; align-items:center; gap:8px; }
+    .locale-wrap svg { width:16px; height:16px; }
+    select { max-width:140px; border:0; background:transparent; color:var(--ink); cursor:pointer; font-size:13px; padding:6px 2px; }
+    .button { display:inline-flex; align-items:center; justify-content:center; gap:18px; border:1px solid var(--line); border-radius:5px; padding:10px 16px; background:var(--surface); font-size:12px; font-weight:550; transition:background .2s,transform .2s; }
+    .button.primary { border-color:#111; background:#111; color:#fff; }
+    .button.primary:hover { background:#333; }
+    .hero { display:grid; grid-template-columns:1.35fr 1fr; gap:50px; align-items:center; padding:76px 0 58px; }
+    .eyebrow { font:10px/1.5 var(--mono); letter-spacing:1.8px; text-transform:uppercase; color:var(--muted); }
+    .hero-eyebrow { display:flex; align-items:center; gap:10px; margin:0 0 23px; }
+    .hero-eyebrow::before { content:''; width:7px; height:7px; background:#94a58a; border-radius:50%; }
+    h1 { max-width:720px; margin:0; font:clamp(48px,5.9vw,84px)/1.04 var(--serif); font-weight:400; letter-spacing:-4px; overflow-wrap:anywhere; }
+    .hero-description { max-width:455px; margin:24px 0 27px; font-size:15px; line-height:1.8; color:var(--muted); white-space:pre-line; }
+    .hero-bottom { display:flex; align-items:center; flex-wrap:wrap; gap:18px; }
+    .hero-bottom .button { padding:12px 20px; }
+    .hero-note { font-size:11px; color:var(--muted); }
+    .hero-art { width:100%; max-width:420px; justify-self:end; }
+    .hero-art svg { width:100%; height:auto; display:block; }
+    .art-caption { display:flex; justify-content:space-between; gap:20px; max-width:340px; margin:0 auto; color:#92958b; font:9px/1.5 var(--mono); letter-spacing:1px; }
+    .ledger { display:flex; align-items:center; justify-content:space-between; gap:20px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:20px 0; }
+    .stats { display:flex; align-items:center; gap:30px; }
+    .stat { display:flex; align-items:baseline; gap:8px; font-size:11px; color:var(--muted); }
+    .stat strong { color:var(--ink); font:18px var(--serif); }
+    .ledger-note { display:flex; align-items:center; gap:8px; font-size:11px; color:var(--muted); }
+    .ledger-note svg { width:14px; height:14px; }
+    .library { display:grid; grid-template-columns:210px minmax(0,1fr); gap:48px; padding:43px 0 80px; align-items:start; }
+    .sidebar { position:sticky; top:28px; }
+    .sidebar-label { margin:0 0 19px 12px; }
+    .category-nav { display:flex; flex-direction:column; gap:5px; }
+    .category-button { display:flex; gap:10px; align-items:center; width:100%; padding:11px 12px; border:0; border-radius:5px; background:transparent; text-align:left; font-size:12px; color:#696d65; transition:background .2s; }
+    .category-button:hover { background:#eeede9; }
+    .category-button[aria-pressed=true] { background:#e9ece5; color:var(--ink); font-weight:600; }
+    .category-button .category-count { margin-left:auto; color:#626e59; font:10px var(--mono); }
+    .category-mark { font-size:17px; width:20px; text-align:center; font-weight:400; }
+    .sidebar-note { margin:34px 12px 0; border-top:1px solid var(--line); padding-top:27px; }
+    .sidebar-note .little-star { font:38px var(--serif); line-height:1; color:#8d9a81; }
+    .sidebar-note h2 { margin:16px 0 9px; font:22px/1.18 var(--serif); letter-spacing:-.5px; font-weight:400; }
+    .sidebar-note p { margin:0; font-size:11px; line-height:1.9; color:var(--muted); }
+    .text-button { border:0; border-bottom:1px solid #b8bcb1; padding:0 0 2px; background:transparent; font-size:11px; }
+    .sidebar-note .text-button { margin-top:20px; }
+    .toolbar { display:flex; gap:12px; align-items:stretch; }
+    .search-box { display:flex; align-items:center; gap:12px; flex:1; min-width:0; padding:0 15px; border:1px solid var(--line); background:#fff; border-radius:6px; }
+    .search-box svg { flex-shrink:0; width:17px; height:17px; color:#8c9085; }
+    .search-box input { background:transparent; border:0; outline:0; width:100%; min-width:0; padding:13px 0; color:var(--ink); font-size:12px; }
+    .search-box:focus-within { outline:2px solid #87967d; outline-offset:2px; }
+    .search-box input::placeholder { color:#70756a; }
+    kbd { font:10px var(--mono); border:1px solid var(--line); border-radius:4px; background:var(--paper); padding:1px 6px; }
+    .clear-search { border:0; background:transparent; font-size:20px; color:var(--muted); line-height:1; padding:4px; }
+    .view-switch { display:flex; align-items:center; padding:4px; border:1px solid var(--line); border-radius:6px; gap:2px; }
+    .view-button { display:flex; align-items:center; justify-content:center; width:35px; border:0; border-radius:3px; background:transparent; color:#8b8e84; }
+    .view-button svg { width:16px; height:16px; margin:9px 0; }
+    .view-button[aria-pressed=true] { background:#fff; color:var(--ink); }
+    .results-meta { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:15px 0 4px; font:10px var(--mono); color:var(--muted); }
+    .results-meta .text-button { font:10px var(--mono); }
+    .resource-section { margin-top:29px; }
+    .section-header { display:flex; align-items:baseline; gap:11px; margin-bottom:5px; }
+    .section-header h2,.section-header h3 { margin:0; font-size:19px; letter-spacing:-.5px; font-weight:550; overflow-wrap:anywhere; }
+    .section-number { color:#626e59; font:10px var(--mono); min-width:23px; }
+    .section-count { display:inline-block; padding:1px 7px; background:#eaece5; border-radius:999px; color:#58624f; font:10px/1.7 var(--mono); }
+    .section-description { margin:0 0 21px 34px; color:var(--muted); font-size:11px; white-space:pre-line; }
+    .resource-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .resource-card { position:relative; min-width:0; display:flex; flex-direction:column; border:1px solid #eaeaea; border-radius:8px; padding:24px; background:var(--surface); transition:box-shadow .2s,transform .2s; }
+    .resource-card:hover { box-shadow:0 2px 8px rgba(0,0,0,.04); transform:translateY(-2px); }
+    .card-top { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:21px; }
+    .monogram { width:37px; height:37px; border-radius:8px; display:grid; place-items:center; background:var(--sage); color:#4e6347; font:600 16px var(--serif); }
+    .tone-1 { background:var(--yellow); color:#79642e; }
+    .tone-2 { background:var(--blue); color:#436277; }
+    .tone-3 { background:var(--rose); color:#885958; }
+    .tone-4 { background:#eeeaf2; color:#6f5d81; }
+    .card-arrow { color:#93998c; font-size:18px; }
+    .entry-title { margin:0 0 9px; font-size:15px; line-height:1.4; letter-spacing:-.2px; font-weight:550; overflow-wrap:anywhere; }
+    .entry-title a:hover { text-decoration:underline; text-underline-offset:4px; }
+    .entry-description { margin:0 0 21px; color:var(--muted); font-size:12px; line-height:1.85; white-space:pre-line; overflow-wrap:anywhere; }
+    .card-footer { margin-top:auto; padding-top:14px; border-top:1px solid var(--line); color:#6e7566; font:9px/1.5 var(--mono); overflow-wrap:anywhere; }
+    .card-footer a:hover { color:var(--ink); }
+    .related { margin:16px 0 0; border-top:1px solid var(--line); padding-top:12px; }
+    .related summary { cursor:pointer; color:#64725b; font-size:10px; }
+    .related-entry { border-top:1px solid var(--line); margin:12px 0 0; padding-top:12px; }
+    .related-entry .entry-title { font-size:12px; }
+    .related-entry .entry-description { margin:0; font-size:10px; }
+    .related-entry .related-entry { margin-left:10px; }
+    .subsection { margin-top:25px; padding-left:18px; border-left:1px solid var(--line); }
+    .subsection .section-header h3 { font-size:16px; }
+    .subsection .section-description { margin-left:0; }
+    .subsection .subsection { padding-left:10px; }
+    .list-view .resource-grid { grid-template-columns:1fr; gap:8px; }
+    .list-view .resource-card { display:grid; grid-template-columns:42px minmax(0,1fr) 120px; column-gap:20px; padding:20px 24px; }
+    .list-view .card-top { grid-row:1/3; align-self:start; margin:0; }
+    .list-view .card-arrow { display:none; }
+    .list-view .entry-title { margin:0 0 6px; }
+    .list-view .entry-description { grid-column:2; margin:0; }
+    .list-view .card-footer { grid-column:3; grid-row:1/3; border:0; padding:0; align-self:center; margin:0; }
+    .list-view .related { grid-column:2/-1; }
+    .empty { margin-top:30px; border:1px solid var(--line); border-radius:8px; text-align:center; background:#fff; padding:55px 24px; }
+    .empty h2 { margin:0 0 10px; font:30px var(--serif); }
+    .empty p { font-size:13px; color:var(--muted); }
+    .section-empty { color:var(--muted); font-size:12px; padding:10px 0 20px 34px; }
+    .footer { display:flex; align-items:center; justify-content:space-between; gap:28px; padding:28px 0 35px; border-top:1px solid var(--line); font-size:10px; color:var(--muted); }
+    .footer-signature { display:flex; align-items:center; gap:10px; }
+    .footer-star { color:#788a6c; font-size:22px; }
+    .footer-actions { display:flex; align-items:center; gap:24px; }
+    .notice { margin:0 0 20px; padding:14px 18px; border:1px solid var(--line); border-radius:6px; background:var(--rose); color:#9f2f2d; font-size:12px; }
+    .motion-ready .reveal { opacity:0; }
+    .motion-ready .reveal.is-visible { animation:reveal .6s cubic-bezier(.16,1,.3,1) both; animation-delay:calc(var(--index,0) * 55ms); }
+    @keyframes reveal { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+    @media(min-width:1600px) { .hero { padding-top:96px; padding-bottom:80px; } }
+    @media(max-width:1150px) { .wrap { width:calc(100% - 72px); } .library { grid-template-columns:180px minmax(0,1fr); gap:28px; } .resource-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } h1 { letter-spacing:-3px; } .header-links { gap:22px; } .hero { gap:24px; } }
+    @media(max-width:780px) { .wrap { width:calc(100% - 40px); } .masthead { min-height:82px; } .header-links { gap:14px; } .header-links>a { display:none; } .hero { grid-template-columns:1fr; padding:50px 0 36px; } h1 { max-width:540px; font-size:64px; } .hero-art { display:none; } .hero-description { max-width:490px; } .library { grid-template-columns:1fr; gap:25px; padding-top:28px; } .sidebar { position:static; } .sidebar-label { margin:0 0 12px; } .category-nav { flex-direction:row; flex-wrap:wrap; gap:5px; } .category-button { width:auto; font-size:11px; padding:8px 11px; gap:7px; } .category-mark { display:none; } .sidebar-note { display:none; } .ledger-note { display:none; } .stats { width:100%; justify-content:space-between; gap:12px; } .resource-section { margin-top:27px; } .footer { align-items:flex-start; } }
+    @media(max-width:480px) { .brand { font-size:22px; gap:8px; } .brand svg { width:23px; } .header-links { gap:8px; } .locale-wrap svg { display:none; } select { max-width:85px; font-size:11px; } .header-links .button { font-size:10px; padding:8px 10px; gap:6px; } .hero { padding-top:40px; } h1 { font-size:53px; letter-spacing:-2.8px; } .hero-eyebrow { font-size:8px; letter-spacing:1.3px; } .hero-description { font-size:13px; } .hero-note { font-size:10px; } .stat { font-size:9px; gap:5px; } .resource-grid { grid-template-columns:1fr; } .resource-card { padding:24px; } .section-description { margin-left:0; } .search-box { padding:0 12px; gap:8px; } .search-box input { font-size:11px; } kbd { display:none; } .view-button { width:28px; } .toolbar { gap:8px; } .footer { flex-direction:column; gap:15px; } .list-view .resource-card { grid-template-columns:32px minmax(0,1fr); padding:20px; column-gap:15px; } .list-view .monogram { width:32px; height:32px; } .list-view .card-footer { grid-column:2; grid-row:auto; margin-top:12px; } .list-view .related { grid-column:1/-1; } }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation:none !important; transition:none !important; } .resource-card:hover,button:active { transform:none; } }
+
+    .locale-switcher { display:inline-flex; align-items:center; gap:6px; white-space:nowrap; font-size:12px; }
+    .locale-switcher[hidden] { display:none; }
+    .locale-button { border:0; padding:6px 0; background:transparent; color:inherit; font:inherit; cursor:pointer; white-space:nowrap; }
+    .locale-button:hover { text-decoration:underline; text-underline-offset:4px; }
+    .locale-button[aria-pressed="true"] { font-weight:700; text-decoration:underline; text-underline-offset:4px; }
+    .locale-button:focus-visible { outline:2px solid currentColor; outline-offset:3px; border-radius:2px; }
+    @media(max-width:780px) { .masthead { flex-wrap:wrap; padding:18px 0; gap:16px; } .header-links { flex-wrap:wrap; } }
+    @media(max-width:480px) { .header-links { width:100%; justify-content:space-between; } .locale-switcher { font-size:11px; gap:5px; } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#collection">Skip to collection</a>
+  <div class="wrap">
+    <header class="masthead">
+      <a class="brand" href="#" aria-label="Curated home"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M3 5h10l3 3 3-3h10v22H19l-3 2-3-2H3z"/><path d="M16 10v14M7 10h5M7 14h5M20 10h5M20 14h5" fill="none" stroke="#f7f6f3" stroke-width="1.5"/></svg><span>curated<span class="brand-dot">.</span></span></a>
+      <nav class="header-links" aria-label="Main navigation">
+        <a href="#collection" data-i18n="explore">Explore the index</a>
+        <div class="locale-wrap locale-switcher" id="locale" role="group" aria-label="Language"></div>
+        <button class="button primary" id="import-button"><span data-i18n="open">Open collection</span><span aria-hidden="true">↗</span></button>
+        <input type="file" id="file-input" accept=".json,application/json" hidden>
+      </nav>
+    </header>
+    <main>
+      <section class="hero reveal" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow hero-eyebrow" data-i18n="eyebrow">Good tools. Thoughtfully collected.</p>
+          <h1 id="page-title">The builder’s library</h1>
+          <p class="hero-description" id="page-description"></p>
+          <div class="hero-bottom"><a class="button primary" href="#collection"><span data-i18n="browse">Find your next good thing</span><span aria-hidden="true">↓</span></a><span class="hero-note" data-i18n="heroNote">A little less searching. A little more making.</span></div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 420 285" fill="none">
+            <ellipse cx="223" cy="151" rx="115" ry="105" fill="#e9ede3"/>
+            <path d="M48 245H377M86 257H352" stroke="#c6cabd" stroke-width="1"/>
+            <g transform="rotate(-12 116 155)"><path d="M79 62h49v178H79z" fill="#f7f6f3" stroke="#3c4437" stroke-width="1.6"/><path d="M89 63v176M79 83h49M79 216h49" stroke="#3c4437" stroke-width="1.4"/><path d="M104 106v67M111 106v45" stroke="#838c7b"/><path d="M101 197h15" stroke="#3c4437" stroke-width="2"/></g>
+            <g><path d="M142 44h61v199h-61z" fill="#f0ead8" stroke="#3c4437" stroke-width="1.6"/><path d="M153 45v197M142 66h61M142 216h61" stroke="#3c4437" stroke-width="1.3"/><text x="180" y="193" transform="rotate(-90 180 193)" fill="#3c4437" font-family="Georgia,serif" font-size="14" letter-spacing="2">MAKE THINGS</text><path d="M169 230h12" stroke="#3c4437" stroke-width="1.5"/></g>
+            <g transform="rotate(8 240 171)"><path d="M211 88h48v153h-48z" fill="#fff" stroke="#3c4437" stroke-width="1.6"/><path d="M221 89v151M211 108h48M211 222h48" stroke="#3c4437" stroke-width="1.3"/><circle cx="240" cy="141" r="8" stroke="#3c4437" stroke-width="1.2"/><path d="M233 167h13M233 174h13M233 181h9" stroke="#8b9383" stroke-width="1.2"/></g>
+            <g transform="rotate(19 291 172)"><path d="M270 106h37v135h-37z" fill="#dce6d7" stroke="#3c4437" stroke-width="1.6"/><path d="M279 107v133M270 124h37M270 220h37" stroke="#3c4437" stroke-width="1.3"/><path d="M289 146v48" stroke="#596c50" stroke-width="2"/></g>
+            <path d="M329 44v33M313 60h33M318 49l23 23M318 72l23-23" stroke="#6e7f61" stroke-width="1.5"/>
+            <path d="M63 105l-8-5M63 115H52M68 95l-4-9M337 192q25-5 23-29m0 0-6 9m6-9 4 10" stroke="#8c9681" stroke-width="1.2" stroke-linecap="round"/>
+            <circle cx="46" cy="170" r="2" fill="#9aa58f"/><circle cx="363" cy="119" r="2" fill="#9aa58f"/>
+          </svg>
+          <div class="art-caption"><span>COLLECT / CONNECT / CREATE</span><span>FIG. 001</span></div>
+        </div>
+      </section>
+      <div class="ledger reveal" style="--index:1">
+        <div class="stats"><span class="stat"><strong id="total-resources">0</strong><span data-i18n="resources">resources to discover</span></span><span class="stat"><strong id="total-collections">0</strong><span data-i18n="collections">thoughtful collections</span></span><span class="stat"><strong id="total-locales">0</strong><span data-i18n="languages">languages, one library</span></span></div>
+        <span class="ledger-note"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m8 1 2 4 4 2-4 2-2 5-2-5-4-2 4-2z"/></svg><span data-i18n="ledger">Useful by nature. Open by design.</span></span>
+      </div>
+      <div class="library" id="collection">
+        <aside class="sidebar reveal" style="--index:2" aria-label="Collections">
+          <p class="eyebrow sidebar-label" data-i18n="index">The collection</p>
+          <nav class="category-nav" id="categories" aria-label="Filter by collection"></nav>
+          <div class="sidebar-note"><span class="little-star" aria-hidden="true">∗</span><h2 data-i18n="noteTitle">Worth keeping<br>close at hand.</h2><p data-i18n="noteBody">The best resource is the one you come back to. Find something useful, then make it your own.</p><button class="text-button" id="download-sidebar" data-i18n="take">Take the collection with you ↗</button></div>
+        </aside>
+        <section class="results reveal" style="--index:3" aria-label="Resources">
+          <div class="notice" id="error" role="alert" hidden></div>
+          <div class="toolbar">
+            <div class="search-box"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4.5 4.5"/></svg><label class="sr-only" for="search" data-i18n="searchLabel">Search resources</label><input id="search" type="search" placeholder="Search for your next useful thing…" autocomplete="off"><button class="clear-search" id="clear-search" aria-label="Clear search" hidden>×</button><kbd aria-hidden="true">/</kbd></div>
+            <div class="view-switch" role="group" aria-label="Display style"><button class="view-button" data-view="grid" aria-label="Grid view" aria-pressed="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><rect x="2" y="2" width="6" height="6" rx="1"/><rect x="12" y="2" width="6" height="6" rx="1"/><rect x="2" y="12" width="6" height="6" rx="1"/><rect x="12" y="12" width="6" height="6" rx="1"/></svg></button><button class="view-button" data-view="list" aria-label="List view" aria-pressed="false"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M2 3h3v3H2zm6 0h10v3H8zM2 9h3v3H2zm6 0h10v3H8zM2 15h3v3H2zm6 0h10v3H8z"/></svg></button></div>
+          </div>
+          <div class="results-meta"><span id="result-count" role="status" aria-live="polite" aria-atomic="true"></span><button class="text-button" id="reset" data-i18n="reset" hidden>Reset filters ↺</button><span id="order-note" data-i18n="order">A considered order, always.</span></div>
+          <div id="resource-sections"></div>
+        </section>
+      </div>
+    </main>
+    <footer class="footer"><div class="footer-signature"><span class="footer-star" aria-hidden="true">∗</span><span data-i18n="footer">A small collection. A wider perspective.</span></div><div class="footer-actions"><button class="text-button" id="download" data-i18n="download">Download collection</button><a href="#" data-i18n="top">Back to top ↑</a></div></footer>
+  </div>
+  <noscript><p class="wrap">Please enable JavaScript to explore this collection.</p></noscript>
+  <!-- Replace this JSON object with a document following data/awesome_list.schema.json.
+       When embedding JSON, escape every '<' as '\u003c' to keep script tags inert. -->
+  <script id="awesome-list-data" type="application/json">
+{
+  "defaultLocale": "en",
+  "title": {
+    "en": "Browsers",
+    "zh-CN": "\u6d4f\u89c8\u5668",
+    "zh-HK": "\u700f\u89bd\u5668"
+  },
+  "sections": [
+    {
+      "title": {
+        "en": "browsers",
+        "zh-CN": "\u6d4f\u89c8\u5668",
+        "zh-HK": "\u700f\u89bd\u5668"
+      },
+      "description": {
+        "en": "Browser automation tools, MCP servers, and AI-powered browsers for agentic web workflows.",
+        "zh-CN": "\u9762\u5411 AI \u667a\u80fd\u4f53\u7684\u6d4f\u89c8\u5668\u81ea\u52a8\u5316\u5de5\u5177\u3001MCP \u670d\u52a1\u5668\u548c AI \u9a71\u52a8\u6d4f\u89c8\u5668\u3002",
+        "zh-HK": "\u9762\u5411 AI \u667a\u80fd\u9ad4\u7684\u700f\u89bd\u5668\u81ea\u52d5\u5316\u5de5\u5177\u3001MCP \u4f3a\u670d\u5668\u53ca AI \u9a45\u52d5\u700f\u89bd\u5668\u3002"
+      },
+      "entries": [
+        {
+          "name": {
+            "en": "chrome-devtools-mcp",
+            "zh-CN": "chrome-devtools-mcp",
+            "zh-HK": "chrome-devtools-mcp"
+          },
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "description": {
+            "en": "Chrome DevTools for coding agents",
+            "zh-CN": "\u9762\u5411\u7f16\u7a0b\u667a\u80fd\u4f53\u7684 Chrome DevTools",
+            "zh-HK": "\u70ba\u7de8\u7a0b\u667a\u80fd\u9ad4\u63d0\u4f9b\u7684 Chrome DevTools"
+          }
+        },
+        {
+          "name": {
+            "en": "playwright-mcp",
+            "zh-CN": "playwright-mcp",
+            "zh-HK": "playwright-mcp"
+          },
+          "url": "https://github.com/microsoft/playwright-mcp",
+          "description": {
+            "en": "Playwright MCP server",
+            "zh-CN": "Playwright MCP \u670d\u52a1\u5668",
+            "zh-HK": "Playwright MCP \u4f3a\u670d\u5668"
+          }
+        },
+        {
+          "name": {
+            "en": "browser-use",
+            "zh-CN": "browser-use",
+            "zh-HK": "browser-use"
+          },
+          "url": "https://github.com/browser-use/browser-use",
+          "description": {
+            "en": "Agents that use the browser.",
+            "zh-CN": "\u4f7f\u7528\u6d4f\u89c8\u5668\u7684\u667a\u80fd\u4f53\u3002",
+            "zh-HK": "\u4f7f\u7528\u700f\u89bd\u5668\u7684\u667a\u80fd\u9ad4\u3002"
+          }
+        },
+        {
+          "name": {
+            "en": "OpenAI Atlas",
+            "zh-CN": "OpenAI Atlas",
+            "zh-HK": "OpenAI Atlas"
+          },
+          "url": "",
+          "description": {
+            "en": "",
+            "zh-CN": "",
+            "zh-HK": ""
+          }
+        },
+        {
+          "name": {
+            "en": "steel-browser",
+            "zh-CN": "steel-browser",
+            "zh-HK": "steel-browser"
+          },
+          "url": "https://github.com/steel-dev/steel-browser",
+          "description": {
+            "en": "\ud83d\udd25 Open Source Browser API for AI Agents & Apps. Steel Browser is a batteries-included browser sandbox that lets you automate the web without worrying about infrastructure.",
+            "zh-CN": "\ud83d\udd25 \u9762\u5411 AI \u667a\u80fd\u4f53\u4e0e\u5e94\u7528\u7684\u5f00\u6e90\u6d4f\u89c8\u5668 API\u3002Steel Browser \u662f\u4e00\u4e2a\u5f00\u7bb1\u5373\u7528\u7684\u6d4f\u89c8\u5668\u6c99\u7bb1\uff0c\u8ba9\u4f60\u65e0\u9700\u64cd\u5fc3\u57fa\u7840\u8bbe\u65bd\u5373\u53ef\u81ea\u52a8\u5316\u7f51\u9875\u3002",
+            "zh-HK": "\ud83d\udd25 \u70ba AI \u667a\u80fd\u9ad4\u53ca\u61c9\u7528\u800c\u8a2d\u7684\u958b\u6e90\u700f\u89bd\u5668 API\u3002Steel Browser \u662f\u4e00\u500b\u958b\u7bb1\u5373\u7528\u7684\u700f\u89bd\u5668\u6c99\u76d2\uff0c\u8b93\u4f60\u7121\u9700\u64d4\u5fc3\u57fa\u790e\u8a2d\u65bd\u5373\u53ef\u81ea\u52d5\u5316\u7db2\u9801\u3002"
+          }
+        },
+        {
+          "name": {
+            "en": "stagehand",
+            "zh-CN": "stagehand",
+            "zh-HK": "stagehand"
+          },
+          "url": "https://github.com/browserbase/stagehand",
+          "description": {
+            "en": "The SDK to extract data and interact with any site on the web. Get started with Claude Code, Codex, Eve, Mastra, and more.",
+            "zh-CN": "\u7528\u4e8e\u63d0\u53d6\u6570\u636e\u5e76\u4e0e\u7f51\u7edc\u4e0a\u4efb\u4f55\u7f51\u7ad9\u4ea4\u4e92\u7684 SDK\u3002\u53ef\u642d\u914d Claude Code\u3001Codex\u3001Eve\u3001Mastra \u7b49\u4f7f\u7528\u3002",
+            "zh-HK": "\u7528\u65bc\u64f7\u53d6\u8cc7\u6599\u4e26\u8207\u7db2\u7d61\u4e0a\u4efb\u4f55\u7db2\u7ad9\u4e92\u52d5\u7684 SDK\u3002\u53ef\u914d\u5408 Claude Code\u3001Codex\u3001Eve\u3001Mastra \u7b49\u4f7f\u7528\u3002"
+          }
+        },
+        {
+          "name": {
+            "en": "skyvern",
+            "zh-CN": "skyvern",
+            "zh-HK": "skyvern"
+          },
+          "url": "https://github.com/Skyvern-AI/skyvern",
+          "description": {
+            "en": "Automate browser based workflows with AI",
+            "zh-CN": "\u4f7f\u7528 AI \u81ea\u52a8\u5316\u57fa\u4e8e\u6d4f\u89c8\u5668\u7684\u5de5\u4f5c\u6d41",
+            "zh-HK": "\u4f7f\u7528 AI \u81ea\u52d5\u5316\u57fa\u65bc\u700f\u89bd\u5668\u7684\u5de5\u4f5c\u6d41\u7a0b"
+          }
+        },
+        {
+          "name": {
+            "en": "nanobrowser",
+            "zh-CN": "nanobrowser",
+            "zh-HK": "nanobrowser"
+          },
+          "url": "https://github.com/nanobrowser/nanobrowser",
+          "description": {
+            "en": "Open-Source Chrome extension for AI-powered web automation. Run multi-agent workflows using your own LLM API key. Alternative to OpenAI Operator.",
+            "zh-CN": "\u7528\u4e8e AI \u9a71\u52a8\u7f51\u9875\u81ea\u52a8\u5316\u7684\u5f00\u6e90 Chrome \u6269\u5c55\u3002\u4f7f\u7528\u4f60\u81ea\u5df1\u7684 LLM API \u5bc6\u94a5\u8fd0\u884c\u591a\u667a\u80fd\u4f53\u5de5\u4f5c\u6d41\u3002OpenAI Operator \u7684\u66ff\u4ee3\u54c1\u3002",
+            "zh-HK": "\u7528\u65bc AI \u9a45\u52d5\u7db2\u9801\u81ea\u52d5\u5316\u7684\u958b\u6e90 Chrome \u64f4\u5145\u529f\u80fd\u3002\u4f7f\u7528\u4f60\u81ea\u5df1\u7684 LLM API \u91d1\u9470\u57f7\u884c\u591a\u667a\u80fd\u9ad4\u5de5\u4f5c\u6d41\u7a0b\u3002OpenAI Operator \u7684\u66ff\u4ee3\u54c1\u3002"
+          }
+        },
+        {
+          "name": {
+            "en": "computer-use-preview",
+            "zh-CN": "computer-use-preview",
+            "zh-HK": "computer-use-preview"
+          },
+          "url": "https://github.com/google-gemini/computer-use-preview",
+          "description": {
+            "en": "",
+            "zh-CN": "",
+            "zh-HK": ""
+          }
+        },
+        {
+          "name": {
+            "en": "browsernode",
+            "zh-CN": "browsernode",
+            "zh-HK": "browsernode"
+          },
+          "url": "https://github.com/lennybase/browsernode",
+          "description": {
+            "en": "\ud83c\udf10 Make websites accessible for AI agents. Automate tasks online with ease.",
+            "zh-CN": "\ud83c\udf10 \u8ba9\u7f51\u7ad9\u53ef\u4f9b AI \u667a\u80fd\u4f53\u8bbf\u95ee\u3002\u8f7b\u677e\u81ea\u52a8\u5316\u5728\u7ebf\u4efb\u52a1\u3002",
+            "zh-HK": "\ud83c\udf10 \u8b93\u7db2\u7ad9\u53ef\u4f9b AI \u667a\u80fd\u9ad4\u5b58\u53d6\u3002\u8f15\u9b06\u81ea\u52d5\u5316\u7dda\u4e0a\u4efb\u52d9\u3002"
+          }
+        },
+        {
+          "name": {
+            "en": "glide",
+            "zh-CN": "glide",
+            "zh-HK": "glide"
+          },
+          "url": "https://github.com/glide-browser/glide",
+          "description": {
+            "en": "An extensible and keyboard-focused web browser",
+            "zh-CN": "\u4e00\u6b3e\u53ef\u6269\u5c55\u4e14\u4ee5\u952e\u76d8\u4e3a\u6838\u5fc3\u7684\u7f51\u9875\u6d4f\u89c8\u5668",
+            "zh-HK": "\u4e00\u6b3e\u53ef\u64f4\u5145\u4e14\u4ee5\u9375\u76e4\u70ba\u6838\u5fc3\u7684\u7db2\u9801\u700f\u89bd\u5668"
+          }
+        },
+        {
+          "name": {
+            "en": "Scrapling",
+            "zh-CN": "Scrapling",
+            "zh-HK": "Scrapling"
+          },
+          "url": "https://github.com/D4Vinci/Scrapling",
+          "description": {
+            "en": "\ud83d\udd77\ufe0f \ufe0f An adaptive Web Scraping framework that handles everything from a single request to a full-scale crawl! Don't be shy, join here: https://discord.gg/EMgGbDceNQ",
+            "zh-CN": "\ud83d\udd77\ufe0f \ufe0f \u4e00\u4e2a\u81ea\u9002\u5e94\u7684\u7f51\u9875\u6293\u53d6\u6846\u67b6\uff0c\u4ece\u5355\u6b21\u8bf7\u6c42\u5230\u5168\u91cf\u722c\u53d6\u4e00\u5e94\u4ff1\u5168\uff01\u522b\u5bb3\u7f9e\uff0c\u52a0\u5165\u6211\u4eec\uff1ahttps://discord.gg/EMgGbDceNQ",
+            "zh-HK": "\ud83d\udd77\ufe0f \ufe0f \u4e00\u500b\u81ea\u9069\u61c9\u7684\u7db2\u9801\u64f7\u53d6\u6846\u67b6\uff0c\u7531\u55ae\u6b21\u8acb\u6c42\u5230\u5168\u91cf\u722c\u53d6\u4e00\u61c9\u4ff1\u5168\uff01\u5225\u5bb3\u7f9e\uff0c\u52a0\u5165\u6211\u5011\uff1ahttps://discord.gg/EMgGbDceNQ"
+          }
+        },
+        {
+          "name": {
+            "en": "BrowserOS",
+            "zh-CN": "BrowserOS",
+            "zh-HK": "BrowserOS"
+          },
+          "url": "https://github.com/browseros-ai/BrowserOS",
+          "description": {
+            "en": "\ud83c\udf10 The open-source Agentic browser; alternative to ChatGPT Atlas, Perplexity Comet, Dia.",
+            "zh-CN": "\ud83c\udf10 \u5f00\u6e90\u7684\u667a\u80fd\u4f53\u6d4f\u89c8\u5668\uff1bChatGPT Atlas\u3001Perplexity Comet\u3001Dia \u7684\u66ff\u4ee3\u54c1\u3002",
+            "zh-HK": "\ud83c\udf10 \u958b\u6e90\u7684\u667a\u80fd\u9ad4\u700f\u89bd\u5668\uff1bChatGPT Atlas\u3001Perplexity Comet\u3001Dia \u7684\u66ff\u4ee3\u54c1\u3002"
+          }
+        },
+        {
+          "name": {
+            "en": "agent-browser",
+            "zh-CN": "agent-browser",
+            "zh-HK": "agent-browser"
+          },
+          "url": "https://github.com/vercel-labs/agent-browser",
+          "description": {
+            "en": "Browser automation CLI for AI agents",
+            "zh-CN": "\u9762\u5411 AI \u667a\u80fd\u4f53\u7684\u6d4f\u89c8\u5668\u81ea\u52a8\u5316 CLI",
+            "zh-HK": "\u70ba AI \u667a\u80fd\u9ad4\u800c\u8a2d\u7684\u700f\u89bd\u5668\u81ea\u52d5\u5316 CLI"
+          }
+        },
+        {
+          "name": {
+            "en": "browser",
+            "zh-CN": "browser",
+            "zh-HK": "browser"
+          },
+          "url": "https://github.com/lightpanda-io/browser",
+          "description": {
+            "en": "Lightpanda: the headless browser designed for AI and automation",
+            "zh-CN": "Lightpanda\uff1a\u4e3a AI \u4e0e\u81ea\u52a8\u5316\u800c\u8bbe\u8ba1\u7684\u65e0\u5934\u6d4f\u89c8\u5668",
+            "zh-HK": "Lightpanda\uff1a\u70ba AI \u8207\u81ea\u52d5\u5316\u800c\u8a2d\u8a08\u7684\u7121\u982d\u700f\u89bd\u5668"
+          }
+        },
+        {
+          "name": {
+            "en": "bb-browser",
+            "zh-CN": "bb-browser",
+            "zh-HK": "bb-browser"
+          },
+          "url": "https://github.com/epiral/bb-browser",
+          "description": {
+            "en": "Your browser is the API. CLI + MCP server for AI agents to control Chrome with your login state.",
+            "zh-CN": "\u4f60\u7684\u6d4f\u89c8\u5668\u5c31\u662f API\u3002\u4e3a AI \u667a\u80fd\u4f53\u63d0\u4f9b CLI + MCP \u670d\u52a1\u5668\uff0c\u8ba9\u5176\u4ee5\u4f60\u7684\u767b\u5f55\u72b6\u6001\u63a7\u5236 Chrome\u3002",
+            "zh-HK": "\u4f60\u7684\u700f\u89bd\u5668\u5c31\u662f API\u3002\u70ba AI \u667a\u80fd\u9ad4\u63d0\u4f9b CLI + MCP \u4f3a\u670d\u5668\uff0c\u8b93\u5176\u4ee5\u4f60\u7684\u767b\u5165\u72c0\u614b\u63a7\u5236 Chrome\u3002"
+          }
+        },
+        {
+          "name": {
+            "en": "pinchtab",
+            "zh-CN": "pinchtab",
+            "zh-HK": "pinchtab"
+          },
+          "url": "https://github.com/pinchtab/pinchtab",
+          "description": {
+            "en": "High-performance browser automation bridge and multi-instance orchestrator with advanced stealth injection and real-time dashboard.",
+            "zh-CN": "\u9ad8\u6027\u80fd\u7684\u6d4f\u89c8\u5668\u81ea\u52a8\u5316\u6865\u63a5\u4e0e\u591a\u5b9e\u4f8b\u7f16\u6392\u5668\uff0c\u5177\u5907\u9ad8\u7ea7\u9690\u8eab\u6ce8\u5165\u4e0e\u5b9e\u65f6\u4eea\u8868\u677f\u3002",
+            "zh-HK": "\u9ad8\u6548\u80fd\u7684\u700f\u89bd\u5668\u81ea\u52d5\u5316\u6a4b\u63a5\u8207\u591a\u5be6\u4f8b\u7de8\u6392\u5668\uff0c\u5177\u5099\u9032\u968e\u96b1\u8eab\u6ce8\u5165\u8207\u5373\u6642\u5100\u8868\u677f\u3002"
+          }
+        },
+        {
+          "name": {
+            "en": "Browser Use CLI",
+            "zh-CN": "Browser Use CLI",
+            "zh-HK": "Browser Use CLI"
+          },
+          "url": "",
+          "description": {
+            "en": "",
+            "zh-CN": "",
+            "zh-HK": ""
+          }
+        },
+        {
+          "name": {
+            "en": "carbonyl",
+            "zh-CN": "carbonyl",
+            "zh-HK": "carbonyl"
+          },
+          "url": "https://github.com/fathyb/carbonyl",
+          "description": {
+            "en": "Chromium running inside your terminal",
+            "zh-CN": "\u5728\u7ec8\u7aef\u91cc\u8fd0\u884c\u7684 Chromium",
+            "zh-HK": "\u5728\u7d42\u7aef\u6a5f\u88e1\u904b\u884c\u7684 Chromium"
+          }
+        },
+        {
+          "name": {
+            "en": "web-access",
+            "zh-CN": "web-access",
+            "zh-HK": "web-access"
+          },
+          "url": "https://github.com/eze-is/web-access",
+          "description": {
+            "en": "\u7ed9 Claude Code \u88c5\u4e0a\u5b8c\u6574\u8054\u7f51\u80fd\u529b\u7684 skill\uff1a\u4e09\u5c42\u901a\u9053\u8c03\u5ea6 + \u6d4f\u89c8\u5668 CDP + \u5e76\u884c\u5206\u6cbb",
+            "zh-CN": "\u7ed9 Claude Code \u88c5\u4e0a\u5b8c\u6574\u8054\u7f51\u80fd\u529b\u7684 skill\uff1a\u4e09\u5c42\u901a\u9053\u8c03\u5ea6 + \u6d4f\u89c8\u5668 CDP + \u5e76\u884c\u5206\u6cbb",
+            "zh-HK": "\u70ba Claude Code \u88dd\u4e0a\u5b8c\u6574\u806f\u7db2\u80fd\u529b\u7684 skill\uff1a\u4e09\u5c64\u901a\u9053\u8abf\u5ea6 + \u700f\u89bd\u5668 CDP + \u4e26\u884c\u5206\u6cbb"
+          }
+        },
+        {
+          "name": {
+            "en": "browser-harness",
+            "zh-CN": "browser-harness",
+            "zh-HK": "browser-harness"
+          },
+          "url": "https://github.com/browser-use/browser-harness",
+          "description": {
+            "en": "Browser Harness | Self-healing harness that enables LLMs to complete any task.",
+            "zh-CN": "Browser Harness | \u81ea\u6108\u5f0f\u6846\u67b6\uff0c\u8ba9 LLM \u80fd\u591f\u5b8c\u6210\u4efb\u4f55\u4efb\u52a1\u3002",
+            "zh-HK": "Browser Harness | \u81ea\u7652\u5f0f\u6846\u67b6\uff0c\u8b93 LLM \u80fd\u5920\u5b8c\u6210\u4efb\u4f55\u4efb\u52d9\u3002"
+          }
+        },
+        {
+          "name": {
+            "en": "playwriter",
+            "zh-CN": "playwriter",
+            "zh-HK": "playwriter"
+          },
+          "url": "https://github.com/remorses/playwriter",
+          "description": {
+            "en": "Chrome extension & CLI to let agents control your browser. Runs Playwright snippets in a stateful sandbox. Available as CLI or MCP",
+            "zh-CN": "\u8ba9\u667a\u80fd\u4f53\u63a7\u5236\u4f60\u6d4f\u89c8\u5668\u7684 Chrome \u6269\u5c55\u4e0e CLI\u3002\u5728\u6709\u72b6\u6001\u7684\u6c99\u7bb1\u4e2d\u8fd0\u884c Playwright \u4ee3\u7801\u7247\u6bb5\u3002\u53ef\u4f5c\u4e3a CLI \u6216 MCP \u4f7f\u7528\u3002",
+            "zh-HK": "\u8b93\u667a\u80fd\u9ad4\u63a7\u5236\u4f60\u700f\u89bd\u5668\u7684 Chrome \u64f4\u5145\u529f\u80fd\u8207 CLI\u3002\u5728\u6709\u72c0\u614b\u7684\u6c99\u76d2\u4e2d\u57f7\u884c Playwright \u7a0b\u5f0f\u78bc\u7247\u6bb5\u3002\u53ef\u4f5c\u70ba CLI \u6216 MCP \u4f7f\u7528\u3002"
+          }
+        },
+        {
+          "name": {
+            "en": "ladybird",
+            "zh-CN": "ladybird",
+            "zh-HK": "ladybird"
+          },
+          "url": "https://github.com/LadybirdBrowser/ladybird",
+          "description": {
+            "en": "Truly independent web browser",
+            "zh-CN": "\u771f\u6b63\u72ec\u7acb\u7684\u7f51\u9875\u6d4f\u89c8\u5668",
+            "zh-HK": "\u771f\u6b63\u7368\u7acb\u7684\u7db2\u9801\u700f\u89bd\u5668"
+          }
+        },
+        {
+          "name": {
+            "en": "obscura",
+            "zh-CN": "obscura",
+            "zh-HK": "obscura"
+          },
+          "url": "https://github.com/h4ckf0r0day/obscura",
+          "description": {
+            "en": "The headless browser for AI agents and web scraping",
+            "zh-CN": "\u9762\u5411 AI \u667a\u80fd\u4f53\u548c\u7f51\u9875\u6293\u53d6\u7684\u65e0\u5934\u6d4f\u89c8\u5668",
+            "zh-HK": "\u70ba AI \u667a\u80fd\u9ad4\u53ca\u7db2\u9801\u64f7\u53d6\u800c\u8a2d\u7684\u7121\u982d\u700f\u89bd\u5668"
+          }
+        },
+        {
+          "name": {
+            "en": "camofox-browser",
+            "zh-CN": "camofox-browser",
+            "zh-HK": "camofox-browser"
+          },
+          "url": "https://github.com/jo-inc/camofox-browser",
+          "description": {
+            "en": "Stealth headless browser for AI agents \u2014 bypass Cloudflare, bot detection, and anti-scraping. Drop-in Puppeteer/Playwright replacement.",
+            "zh-CN": "\u9762\u5411 AI \u667a\u80fd\u4f53\u7684\u9690\u8eab\u65e0\u5934\u6d4f\u89c8\u5668 \u2014\u2014 \u7ed5\u8fc7 Cloudflare\u3001\u673a\u5668\u4eba\u68c0\u6d4b\u4e0e\u53cd\u6293\u53d6\u3002\u53ef\u76f4\u63a5\u66ff\u6362 Puppeteer/Playwright\u3002",
+            "zh-HK": "\u70ba AI \u667a\u80fd\u9ad4\u800c\u8a2d\u7684\u96b1\u8eab\u7121\u982d\u700f\u89bd\u5668 \u2014\u2014 \u7e5e\u904e Cloudflare\u3001\u6a5f\u5668\u4eba\u5075\u6e2c\u8207\u53cd\u64f7\u53d6\u3002\u53ef\u76f4\u63a5\u66ff\u63db Puppeteer/Playwright\u3002"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+  <script>
+    'use strict';
+    (() => {
+      const $ = (id) => document.getElementById(id);
+      const copy = {
+        en: {explore:'Explore the index',language:'Language',open:'Open collection',eyebrow:'Good tools. Thoughtfully collected.',browse:'Find your next good thing',heroNote:'A little less searching. A little more making.',resources:'resources to discover',collections:'thoughtful collections',languages:'languages, one library',ledger:'Useful by nature. Open by design.',index:'The collection',noteTitle:'Worth keeping close at hand.',noteBody:'The best resource is the one you come back to. Find something useful, then make it your own.',take:'Take the collection with you ↗',searchLabel:'Search resources',search:'Search for your next useful thing…',reset:'Reset filters ↺',order:'A considered order, always.',footer:'A small collection. A wider perspective.',download:'Download collection',top:'Back to top ↑',all:'All resources',showing:(n,total)=>`Showing ${n} of ${total} resources`,related:(n)=>`${n} related ${n===1?'resource':'resources'}`,noResults:'A little too specific?',noResultsBody:'Try another search or explore a different collection.',empty:'Room for good things.',emptyBody:'This collection has no resources yet.',sectionEmpty:'No resources in this section yet.',untitled:'Untitled collection',unnamed:'Untitled resource',reference:'Reference note',fileError:'Could not open this collection. ',grid:'Grid view',list:'List view',clear:'Clear search',fileLarge:'Please choose a JSON file smaller than 5 MB.'},
+        zh: {explore:'浏览目录',language:'语言',open:'打开收藏集',eyebrow:'好用的工具，用心的收藏。',browse:'发现下一个好工具',heroNote:'少一些寻找，多一些创造。',resources:'个精选资源',collections:'个主题收藏',languages:'种语言，同一份灵感',ledger:'实用为本，开放共享。',index:'资源分类',noteTitle:'值得收藏，随时翻阅。',noteBody:'好的资源，总让你愿意再次打开。找到有用的工具，让想法成为现实。',take:'随身带走这份收藏 ↗',searchLabel:'搜索资源',search:'搜索你的下一个好工具…',reset:'重置筛选 ↺',order:'用心整理，依次呈现。',footer:'小小的收藏，更大的视野。',download:'下载收藏集',top:'回到顶部 ↑',all:'全部资源',showing:(n,total)=>`显示 ${n} / ${total} 个资源`,related:(n)=>`${n} 个相关资源`,noResults:'换个关键词试试？',noResultsBody:'试试其他关键词，或浏览不同的分类。',empty:'为好东西留个位置。',emptyBody:'这个收藏集还没有资源。',sectionEmpty:'本分类暂时没有资源。',untitled:'未命名收藏',unnamed:'未命名资源',reference:'参考笔记',fileError:'无法打开此收藏集。',grid:'网格视图',list:'列表视图',clear:'清除搜索',fileLarge:'请选择小于 5 MB 的 JSON 文件。'}
+      };
+      let data, locale, locales = [], selected = null, query = '', view = 'grid';
+      let allCount = 0;
+      const ui = () => copy[locale?.toLowerCase().startsWith('zh') ? 'zh' : 'en'];
+      function localized(value) {
+        if (!value) return '';
+        for (const key of [locale, data.defaultLocale, ...Object.keys(value)]) {
+          if (typeof value[key] === 'string' && value[key].trim()) return value[key];
+        }
+        return '';
+      }
+      function el(tag, className, text) {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text !== undefined) node.textContent = text;
+        return node;
+      }
+      function link(url, text, className) {
+        const node = el('a', className, text);
+        node.href = url;
+        node.target = '_blank';
+        node.rel = 'noopener noreferrer';
+        return node;
+      }
+      function safeURL(value) {
+        try { const url = new URL(value); return ['https:', 'http:'].includes(url.protocol) ? url : null; } catch { return null; }
+      }
+      // Mirrors the supplied schema's types, required fields, and recursive shapes.
+      // Unknown properties are allowed, as they are in the schema.
+      function validate(value) {
+        const object = (v, path) => { if (!v || typeof v !== 'object' || Array.isArray(v)) throw Error(`${path}: expected an object.`); };
+        const textMap = (v, path) => { object(v, path); if (Object.values(v).some(x => typeof x !== 'string')) throw Error(`${path}: translations must be strings.`); };
+        const children = (node, key, path, visitor) => {
+          if (!(key in node)) return;
+          if (!Array.isArray(node[key])) throw Error(`${path}.${key}: expected an array.`);
+          node[key].forEach((child, i) => visitor(child, `${path}.${key}[${i}]`));
+        };
+        const entry = (node, path) => {
+          object(node, path); textMap(node.name, `${path}.name`); textMap(node.description, `${path}.description`);
+          if ('url' in node && typeof node.url !== 'string') throw Error(`${path}.url: expected a string.`);
+          children(node, 'entries', path, entry);
+        };
+        const section = (node, path) => {
+          object(node, path); textMap(node.title, `${path}.title`);
+          if ('description' in node) textMap(node.description, `${path}.description`);
+          children(node, 'entries', path, entry); children(node, 'sections', path, section);
+        };
+        object(value, 'collection');
+        if (typeof value.defaultLocale !== 'string') throw Error('defaultLocale: expected a string.');
+        textMap(value.title, 'title');
+        if ('description' in value) textMap(value.description, 'description');
+        if (!('sections' in value)) throw Error('sections: expected an array.');
+        children(value, 'sections', 'collection', section);
+      }
+      function visit(node, callback, kind = 'root') {
+        callback(node, kind);
+        if (kind !== 'entry') for (const child of node.sections || []) visit(child, callback, 'section');
+        if (kind !== 'root') for (const child of node.entries || []) visit(child, callback, 'entry');
+      }
+      function entryCount(entry) { return 1 + (entry.entries || []).reduce((n, child) => n + entryCount(child), 0); }
+      function sectionCount(section) { return (section.entries || []).reduce((n, entry) => n + entryCount(entry), 0) + (section.sections || []).reduce((n, child) => n + sectionCount(child), 0); }
+      function searchable(node) { return ['title', 'name', 'description'].map(key => localized(node[key])).concat(node.url || '').join(' ').toLocaleLowerCase(); }
+      function filterEntry(entry, ancestorMatch) {
+        if (!query || ancestorMatch || searchable(entry).includes(query)) return entry;
+        const children = (entry.entries || []).map(child => filterEntry(child, false)).filter(Boolean);
+        return children.length ? {...entry, entries:children} : null;
+      }
+      function filterSection(section, ancestorMatch = false) {
+        const match = ancestorMatch || Boolean(query && searchable(section).includes(query));
+        const entries = (section.entries || []).map(entry => filterEntry(entry, match)).filter(Boolean);
+        const sections = (section.sections || []).map(child => filterSection(child, match)).filter(Boolean);
+        return !query || match || entries.length || sections.length ? {...section, entries, sections} : null;
+      }
+      function renderEntry(entry, index, nested = false) {
+        const name = localized(entry.name) || ui().unnamed;
+        const url = safeURL(entry.url);
+        const card = el(nested ? 'div' : 'article', nested ? 'related-entry' : 'resource-card');
+        if (!nested) {
+          const top = el('div', 'card-top');
+          const letters = name.trim().split(/\s+/).map(word => Array.from(word)[0]).slice(0, 2).join('');
+          const mark = el('span', `monogram tone-${index % 5}`, letters); mark.setAttribute('aria-hidden', 'true'); top.append(mark);
+          if (url) { const arrow = el('span', 'card-arrow', '↗'); arrow.setAttribute('aria-hidden','true'); top.append(arrow); }
+          card.append(top);
+        }
+        const title = el('h3', 'entry-title'); title.append(url ? link(url.href, name) : document.createTextNode(name));
+        card.append(title, el('p', 'entry-description', localized(entry.description)));
+        if (!nested) {
+          const footer = el('div', 'card-footer');
+          footer.append(url ? link(url.href, url.hostname.replace(/^www\./, '')) : document.createTextNode(ui().reference));
+          card.append(footer);
+        }
+        if (entry.entries?.length) {
+          const details = el('details', 'related');
+          details.open = Boolean(query);
+          details.append(el('summary', '', ui().related(entry.entries.reduce((n,child) => n + entryCount(child),0))));
+          entry.entries.forEach((child, i) => details.append(renderEntry(child, i, true)));
+          card.append(details);
+        }
+        return card;
+      }
+      function renderSection(section, index, depth = 0) {
+        const block = el('section', depth ? 'subsection' : 'resource-section');
+        const header = el('div', 'section-header');
+        if (!depth) header.append(el('span', 'section-number', String(index + 1).padStart(2, '0')));
+        header.append(el(depth ? 'h3' : 'h2', '', localized(section.title) || ui().untitled), el('span', 'section-count', sectionCount(section)));
+        block.append(header);
+        const description = localized(section.description);
+        if (description) block.append(el('p', 'section-description', description));
+        else header.style.marginBottom = '18px';
+        const grid = el('div', 'resource-grid');
+        (section.entries || []).forEach((entry, i) => grid.append(renderEntry(entry, i + index)));
+        if (grid.childElementCount) block.append(grid);
+        (section.sections || []).forEach((child, i) => block.append(renderSection(child, i, depth + 1)));
+        if (!sectionCount(section) && !section.sections?.length) block.append(el('p', 'section-empty', ui().sectionEmpty));
+        return block;
+      }
+      function renderCategories() {
+        const nav = $('categories'); nav.replaceChildren();
+        const items = [{title:ui().all, count:allCount, index:null}, ...data.sections.map((section, index) => ({title:localized(section.title) || ui().untitled, count:sectionCount(section), index}))];
+        items.forEach(item => {
+          const button = el('button', 'category-button'); button.type = 'button'; button.setAttribute('aria-pressed', String(selected === item.index));
+          const mark = el('span', 'category-mark', item.index === null ? '▦' : ['◧','◫','◇','⊞','◉'][item.index % 5]); mark.setAttribute('aria-hidden', 'true');
+          button.append(mark, el('span', '', item.title), el('span', 'category-count', String(item.count).padStart(2, '0')));
+          button.addEventListener('click', () => { selected = item.index; [...nav.children].forEach(child => child.setAttribute('aria-pressed',String(child === button))); renderResults(); });
+          nav.append(button);
+        });
+      }
+      function renderResults() {
+        const container = $('resource-sections'); container.replaceChildren();
+        let visibleCount = 0;
+        data.sections.forEach((section, index) => {
+          if (selected !== null && selected !== index) return;
+          const filtered = filterSection(section);
+          if (filtered) { visibleCount += sectionCount(filtered); container.append(renderSection(filtered, index)); }
+        });
+        if (!container.childElementCount) {
+          const empty = el('div', 'empty');
+          empty.append(el('h2', '', query ? ui().noResults : ui().empty), el('p', '', query ? ui().noResultsBody : ui().emptyBody));
+          if (query || selected !== null) { const reset = el('button', 'button', ui().reset); reset.addEventListener('click', resetFilters); empty.append(reset); }
+          container.append(empty);
+        }
+        $('result-count').textContent = ui().showing(visibleCount, allCount);
+        $('clear-search').hidden = !$('search').value;
+        $('reset').hidden = !query && selected === null;
+        $('order-note').hidden = !$('reset').hidden;
+      }
+      function render() {
+        document.documentElement.lang = locale || 'en';
+        const title = localized(data.title) || ui().untitled;
+        document.title = `${title} — Curated`;
+        $('page-title').textContent = title;
+        $('page-description').textContent = localized(data.description);
+        $('page-description').hidden = !localized(data.description);
+        document.querySelector('meta[name="description"]').content = localized(data.description);
+        document.querySelectorAll('[data-i18n]').forEach(node => { node.textContent = ui()[node.dataset.i18n]; });
+        $('search').placeholder = ui().search;
+        $('clear-search').setAttribute('aria-label', ui().clear);
+        $('locale').setAttribute('aria-label', ui().language);
+        $('locale').querySelectorAll('[data-locale]').forEach(button => {
+          button.setAttribute('aria-pressed', String(button.dataset.locale === locale));
+        });
+        document.querySelectorAll('[data-view]').forEach(button => button.setAttribute('aria-label', ui()[button.dataset.view]));
+        $('total-resources').textContent = String(allCount).padStart(2, '0');
+        $('total-collections').textContent = String(data.sections.length).padStart(2, '0');
+        $('total-locales').textContent = String(locales.length).padStart(2, '0');
+        renderCategories(); renderResults();
+      }
+      function setData(value) {
+        validate(value);
+        data = value; locale = data.defaultLocale; selected = null; query = ''; $('search').value = '';
+        const found = new Set([data.defaultLocale]);
+        visit(data, (node, kind) => { for (const key of [kind === 'entry' ? 'name' : 'title','description']) for (const code of Object.keys(node[key] || {})) found.add(code); });
+        locales = [...found];
+        const names = {en:'English', 'zh-CN':'简体中文', 'zh-HK':'繁體中文', 'zh-TW':'繁體中文'};
+        const preferred = Object.keys(names);
+        const priority = code => preferred.includes(code) ? preferred.indexOf(code) : preferred.length;
+        const switcher = $('locale'); switcher.replaceChildren();
+        [...locales].sort((a, b) => priority(a) - priority(b)).forEach((code, index) => {
+          if (index) switcher.append(document.createTextNode(' | '));
+          const button = el('button', 'locale-button', names[code] || code || 'Default');
+          button.type = 'button'; button.dataset.locale = code; switcher.append(button);
+        });
+        switcher.hidden = locales.length < 2;
+        allCount = data.sections.reduce((n, section) => n + sectionCount(section), 0);
+        $('error').hidden = true;
+        render();
+      }
+      function resetFilters() { selected = null; query = ''; $('search').value = ''; renderCategories(); renderResults(); }
+      function download() {
+        const blob = new Blob([JSON.stringify(data, null, 2) + '\n'], {type:'application/json'});
+        const url = URL.createObjectURL(blob);
+        const anchor = el('a'); anchor.href = url; anchor.download = 'awesome-list.json'; anchor.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }
+      $('search').addEventListener('input', event => { query = event.target.value.trim().toLocaleLowerCase(); renderResults(); });
+      $('clear-search').addEventListener('click', () => { $('search').value = ''; query = ''; renderResults(); $('search').focus(); });
+      $('reset').addEventListener('click', resetFilters);
+      $('locale').addEventListener('click', event => {
+        const button = event.target.closest('[data-locale]');
+        if (!button) return;
+        locale = button.dataset.locale; render();
+      });
+      document.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => {
+        view = button.dataset.view; $('resource-sections').classList.toggle('list-view', view === 'list');
+        document.querySelectorAll('[data-view]').forEach(node => node.setAttribute('aria-pressed', String(node === button)));
+      }));
+      $('import-button').addEventListener('click', () => $('file-input').click());
+      $('file-input').addEventListener('change', async event => {
+        const file = event.target.files[0]; if (!file) return;
+        try {
+          if (file.size > 5 * 1024 * 1024) throw Error(ui().fileLarge);
+          const value = JSON.parse((await file.text()).replace(/^\uFEFF/, ''));
+          setData(value);
+        } catch (error) {
+          $('error').textContent = ui().fileError + error.message; $('error').hidden = false;
+          $('collection').scrollIntoView({block:'start'});
+        } finally { event.target.value = ''; }
+      });
+      $('download').addEventListener('click', download);
+      $('download-sidebar').addEventListener('click', download);
+      document.addEventListener('keydown', event => {
+        if (event.key === '/' && !event.ctrlKey && !event.metaKey && !event.altKey && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName) && !document.activeElement.isContentEditable) {
+          event.preventDefault(); $('search').focus();
+        }
+        if (event.key === 'Escape' && document.activeElement === $('search')) { $('search').value = ''; query = ''; renderResults(); }
+      });
+      if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.body.classList.add('motion-ready');
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } });
+        }, {threshold:0});
+        document.querySelectorAll('.reveal').forEach(node => observer.observe(node));
+      }
+      try { setData(JSON.parse($('awesome-list-data').textContent)); }
+      catch (error) { $('error').textContent = 'Could not load the embedded collection. ' + error.message; $('error').hidden = false; }
+    })();
+  </script>
+</body>
+</html>
