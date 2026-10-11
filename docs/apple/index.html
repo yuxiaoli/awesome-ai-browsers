@@ -262,13 +262,6 @@
       *, *::before, *::after { transition: none !important; animation: none !important; }
       .resource-card:hover, button:active, .primary:active { transform: none; }
     }
-
-    .locale-switcher { display:inline-flex; align-items:center; gap:6px; white-space:nowrap; font-size:12px; }
-    .locale-switcher[hidden] { display:none; }
-    .locale-button { border:0; padding:6px 0; background:transparent; color:inherit; font:inherit; cursor:pointer; white-space:nowrap; }
-    .locale-button:hover { text-decoration:underline; text-underline-offset:4px; }
-    .locale-button[aria-pressed="true"] { font-weight:700; text-decoration:underline; text-underline-offset:4px; }
-    .locale-button:focus-visible { outline:2px solid currentColor; outline-offset:3px; border-radius:2px; }
   </style>
 </head>
 <body>
@@ -281,7 +274,7 @@
         <button type="button" class="nav-tab" id="saved-tab" aria-pressed="false"><span data-i18n="saved">Saved</span><span class="save-count" id="save-count" hidden>0</span></button>
       </div>
       <div class="nav-actions">
-        <div class="language-control locale-switcher" id="locale" role="group" aria-label="Language"></div>
+        <label class="language-control"><span data-icon="globe"></span><span class="sr-only" data-i18n="language">Language</span><select id="locale" aria-label="Language"></select></label>
         <button type="button" id="open-file" class="subtle-button"><span class="open-label" data-i18n="open">Open collection</span><span data-icon="upload"></span></button>
         <input type="file" id="file-input" accept=".json,application/json" hidden>
       </div>
@@ -863,19 +856,16 @@
       switcher.setAttribute('aria-label', tr('language'));
       const preferred = ['en', 'zh-CN', 'zh-HK', 'zh-TW'];
       const priority = code => preferred.includes(code) ? preferred.indexOf(code) : preferred.length;
-      [...locales].sort((a, b) => priority(a) - priority(b)).forEach((code, index) => {
+      [...locales].sort((a, b) => priority(a) - priority(b)).forEach((code) => {
         let label = code || 'Default';
         if (code === 'en') label = 'English';
         else if (code === 'zh-CN') label = '简体中文';
         else if (code === 'zh-HK' || code === 'zh-TW') label = '繁體中文';
         else { try { label = new Intl.DisplayNames([code], {type: 'language'}).of(code) || code; } catch {} }
-        if (index) switcher.append(document.createTextNode(' | '));
-        const button = el('button', 'locale-button', label);
-        button.type = 'button'; button.dataset.locale = code;
-        button.setAttribute('aria-pressed', String(code === locale));
-        switcher.append(button);
+        const option = el('option', '', label); option.value = code; switcher.append(option);
       });
-      switcher.hidden = locales.length < 2;
+      switcher.value = locale;
+      switcher.closest('label').hidden = locales.length < 2;
       $('#preview-rows').replaceChildren();
       records.filter((record) => !record.parents.length).slice(0, 3).forEach((record) => {
         const row = el('div', 'preview-row'), copy = el('div');
@@ -1009,13 +999,7 @@
       indexCollection(); updateStaticCopy(); renderCategories(); setSavedMode(false); updateSavedCount();
       $('#load-error').hidden = true;
     }
-    $('#locale').addEventListener('click', (event) => {
-      const button = event.target.closest('[data-locale]');
-      if (!button) return;
-      locale = button.dataset.locale;
-      updateStaticCopy(); renderCategories(); renderResults();
-      [...$('#locale').querySelectorAll('[data-locale]')].find(item => item.dataset.locale === locale).focus({preventScroll:true});
-    });
+    $('#locale').addEventListener('change', (event) => { locale = event.target.value; updateStaticCopy(); renderCategories(); renderResults(); });
     $('#search').addEventListener('input', (event) => { query = event.target.value; renderResults(); });
     $('#clear-search').addEventListener('click', () => { query = ''; $('#search').value = ''; renderResults(); $('#search').focus(); });
     $('#sort').addEventListener('change', renderResults);

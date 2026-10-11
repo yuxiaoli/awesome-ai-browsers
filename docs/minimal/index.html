@@ -140,15 +140,6 @@
     @media(max-width:780px) { .wrap { width:calc(100% - 40px); } .masthead { min-height:82px; } .header-links { gap:14px; } .header-links>a { display:none; } .hero { grid-template-columns:1fr; padding:50px 0 36px; } h1 { max-width:540px; font-size:64px; } .hero-art { display:none; } .hero-description { max-width:490px; } .library { grid-template-columns:1fr; gap:25px; padding-top:28px; } .sidebar { position:static; } .sidebar-label { margin:0 0 12px; } .category-nav { flex-direction:row; flex-wrap:wrap; gap:5px; } .category-button { width:auto; font-size:11px; padding:8px 11px; gap:7px; } .category-mark { display:none; } .sidebar-note { display:none; } .ledger-note { display:none; } .stats { width:100%; justify-content:space-between; gap:12px; } .resource-section { margin-top:27px; } .footer { align-items:flex-start; } }
     @media(max-width:480px) { .brand { font-size:22px; gap:8px; } .brand svg { width:23px; } .header-links { gap:8px; } .locale-wrap svg { display:none; } select { max-width:85px; font-size:11px; } .header-links .button { font-size:10px; padding:8px 10px; gap:6px; } .hero { padding-top:40px; } h1 { font-size:53px; letter-spacing:-2.8px; } .hero-eyebrow { font-size:8px; letter-spacing:1.3px; } .hero-description { font-size:13px; } .hero-note { font-size:10px; } .stat { font-size:9px; gap:5px; } .resource-grid { grid-template-columns:1fr; } .resource-card { padding:24px; } .section-description { margin-left:0; } .search-box { padding:0 12px; gap:8px; } .search-box input { font-size:11px; } kbd { display:none; } .view-button { width:28px; } .toolbar { gap:8px; } .footer { flex-direction:column; gap:15px; } .list-view .resource-card { grid-template-columns:32px minmax(0,1fr); padding:20px; column-gap:15px; } .list-view .monogram { width:32px; height:32px; } .list-view .card-footer { grid-column:2; grid-row:auto; margin-top:12px; } .list-view .related { grid-column:1/-1; } }
     @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation:none !important; transition:none !important; } .resource-card:hover,button:active { transform:none; } }
-
-    .locale-switcher { display:inline-flex; align-items:center; gap:6px; white-space:nowrap; font-size:12px; }
-    .locale-switcher[hidden] { display:none; }
-    .locale-button { border:0; padding:6px 0; background:transparent; color:inherit; font:inherit; cursor:pointer; white-space:nowrap; }
-    .locale-button:hover { text-decoration:underline; text-underline-offset:4px; }
-    .locale-button[aria-pressed="true"] { font-weight:700; text-decoration:underline; text-underline-offset:4px; }
-    .locale-button:focus-visible { outline:2px solid currentColor; outline-offset:3px; border-radius:2px; }
-    @media(max-width:780px) { .masthead { flex-wrap:wrap; padding:18px 0; gap:16px; } .header-links { flex-wrap:wrap; } }
-    @media(max-width:480px) { .header-links { width:100%; justify-content:space-between; } .locale-switcher { font-size:11px; gap:5px; } }
   </style>
 </head>
 <body>
@@ -158,7 +149,7 @@
       <a class="brand" href="#" aria-label="Curated home"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M3 5h10l3 3 3-3h10v22H19l-3 2-3-2H3z"/><path d="M16 10v14M7 10h5M7 14h5M20 10h5M20 14h5" fill="none" stroke="#f7f6f3" stroke-width="1.5"/></svg><span>curated<span class="brand-dot">.</span></span></a>
       <nav class="header-links" aria-label="Main navigation">
         <a href="#collection" data-i18n="explore">Explore the index</a>
-        <div class="locale-wrap locale-switcher" id="locale" role="group" aria-label="Language"></div>
+        <label class="locale-wrap"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><ellipse cx="10" cy="10" rx="3.3" ry="7.5"/><path d="M3 7.5h14M3 12.5h14"/></svg><span class="sr-only" data-i18n="language">Language</span><select id="locale" aria-label="Language"></select></label>
         <button class="button primary" id="import-button"><span data-i18n="open">Open collection</span><span aria-hidden="true">↗</span></button>
         <input type="file" id="file-input" accept=".json,application/json" hidden>
       </nav>
@@ -728,9 +719,7 @@
         $('search').placeholder = ui().search;
         $('clear-search').setAttribute('aria-label', ui().clear);
         $('locale').setAttribute('aria-label', ui().language);
-        $('locale').querySelectorAll('[data-locale]').forEach(button => {
-          button.setAttribute('aria-pressed', String(button.dataset.locale === locale));
-        });
+        $('locale').value = locale;
         document.querySelectorAll('[data-view]').forEach(button => button.setAttribute('aria-label', ui()[button.dataset.view]));
         $('total-resources').textContent = String(allCount).padStart(2, '0');
         $('total-collections').textContent = String(data.sections.length).padStart(2, '0');
@@ -747,12 +736,14 @@
         const preferred = Object.keys(names);
         const priority = code => preferred.includes(code) ? preferred.indexOf(code) : preferred.length;
         const switcher = $('locale'); switcher.replaceChildren();
-        [...locales].sort((a, b) => priority(a) - priority(b)).forEach((code, index) => {
-          if (index) switcher.append(document.createTextNode(' | '));
-          const button = el('button', 'locale-button', names[code] || code || 'Default');
-          button.type = 'button'; button.dataset.locale = code; switcher.append(button);
+        [...locales].sort((a, b) => priority(a) - priority(b)).forEach(code => {
+          let name = names[code] || code || 'Default';
+          if (!names[code]) {
+            try { name = new Intl.DisplayNames([code], {type:'language'}).of(code) || name; } catch { /* Unknown locale codes retain their names. */ }
+          }
+          const option = el('option', '', name); option.value = code; switcher.append(option);
         });
-        switcher.hidden = locales.length < 2;
+        switcher.closest('label').hidden = locales.length < 2;
         allCount = data.sections.reduce((n, section) => n + sectionCount(section), 0);
         $('error').hidden = true;
         render();
@@ -767,11 +758,7 @@
       $('search').addEventListener('input', event => { query = event.target.value.trim().toLocaleLowerCase(); renderResults(); });
       $('clear-search').addEventListener('click', () => { $('search').value = ''; query = ''; renderResults(); $('search').focus(); });
       $('reset').addEventListener('click', resetFilters);
-      $('locale').addEventListener('click', event => {
-        const button = event.target.closest('[data-locale]');
-        if (!button) return;
-        locale = button.dataset.locale; render();
-      });
+      $('locale').addEventListener('change', event => { locale = event.target.value; render(); });
       document.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => {
         view = button.dataset.view; $('resource-sections').classList.toggle('list-view', view === 'list');
         document.querySelectorAll('[data-view]').forEach(node => node.setAttribute('aria-pressed', String(node === button)));

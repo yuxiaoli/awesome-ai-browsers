@@ -301,9 +301,7 @@
     $("category-total").textContent = String(sections.length).padStart(2, "0");
     $("locale-total").textContent = String(locales.length).padStart(2, "0");
     $("data-status").textContent = tr(loading ? "loadingData" : source === "sample" ? "sampleData" : "loadedData");
-    $("locale-select").querySelectorAll("[data-locale]").forEach((button) => {
-      button.setAttribute("aria-pressed", String(button.dataset.locale === locale));
-    });
+    $("locale-select").value = locale;
     renderCategories();
     renderResults();
   }
@@ -355,14 +353,12 @@
     const priority = (code) => preferred.includes(code) ? preferred.indexOf(code) : preferred.length;
     const switcher = $("locale-select");
     switcher.replaceChildren();
-    [...locales].sort((a, b) => priority(a) - priority(b)).forEach((code, index) => {
-      if (index) switcher.append(document.createTextNode(" | "));
-      const button = node("button", "locale-button", localeLabel(code));
-      button.type = "button";
-      button.dataset.locale = code;
-      switcher.append(button);
+    [...locales].sort((a, b) => priority(a) - priority(b)).forEach((code) => {
+      const option = node("option", "", localeLabel(code));
+      option.value = code;
+      switcher.append(option);
     });
-    switcher.hidden = locales.length < 2;
+    switcher.closest("label").hidden = locales.length < 2;
     $("error-panel").hidden = true;
     setLoading(false);
     render();
@@ -391,12 +387,7 @@
     writeStorage("atlas-theme", preferredTheme);
     applyTheme();
   });
-  $("locale-select").addEventListener("click", (event) => {
-    const button = event.target.closest("[data-locale]");
-    if (!button) return;
-    locale = button.dataset.locale;
-    render();
-  });
+  $("locale-select").addEventListener("change", (event) => { locale = event.target.value; render(); });
   $("search-input").addEventListener("input", (event) => { query = event.target.value.trim().toLocaleLowerCase(); renderResults(); });
   $("clear-search").addEventListener("click", () => { query = ""; $("search-input").value = ""; renderResults(); $("search-input").focus(); });
   $("saved-toggle").addEventListener("click", () => { savedOnly = !savedOnly; renderResults(); });
