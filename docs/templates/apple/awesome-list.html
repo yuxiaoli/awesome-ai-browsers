@@ -1,0 +1,1039 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="A thoughtfully organized collection of useful tools and resources.">
+  <title>Browsers</title>
+  <style>
+    :root {
+      font: 100%/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-optical-sizing: auto;
+      --bg: #f7f8fa; --surface: #fff; --ink: #202126; --muted: #6c707b;
+      --line: #e5e7ec; --blue: #0069d9; --blue-soft: #e9f2ff;
+      --glass: rgb(247 248 250 / .84); --shadow: 0 12px 36px rgb(25 40 75 / .055);
+      --radius: 1.35rem;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 7rem; }
+    body { margin: 0; background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
+    button, input, select { font: inherit; }
+    button, a, select, summary { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+    button, select { cursor: pointer; }
+    button { color: inherit; }
+    a { color: inherit; text-decoration: none; }
+    button { border: 0; }
+    button:active, .primary:active { transform: scale(.97); transition: none; }
+    :focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+    [hidden] { display: none !important; }
+    svg { width: 1.25rem; height: 1.25rem; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.65; stroke-linecap: round; stroke-linejoin: round; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .skip-link { position: fixed; top: .6rem; left: 1rem; padding: .75rem 1rem; background: var(--surface); z-index: 100; transform: translateY(-180%); border-radius: .7rem; }
+    .skip-link:focus { transform: none; }
+    .wrap { width: min(80rem, calc(100% - 6rem)); margin-inline: auto; }
+    .topbar { position: sticky; top: 0; z-index: 20; background: var(--glass); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%); }
+    .topbar::after { content: ""; position: absolute; height: 1rem; top: 100%; left: 0; right: 0; background: linear-gradient(var(--glass), transparent); pointer-events: none; }
+    .nav { height: 5.4rem; display: flex; align-items: center; gap: 3.3rem; }
+    .brand { display: inline-flex; align-items: center; gap: .65rem; font-size: 1.08rem; font-weight: 720; letter-spacing: -.045em; white-space: nowrap; }
+    .brand-mark { width: 1.9rem; height: 1.9rem; color: var(--blue); stroke-width: 2.4; }
+    .nav-tabs { display: flex; align-items: center; gap: 1.7rem; }
+    .nav-tab { position: relative; padding: .8rem 0; background: transparent; font-size: .85rem; font-weight: 560; color: var(--muted); }
+    .nav-tab[aria-pressed="true"] { color: var(--ink); }
+    .nav-tab[aria-pressed="true"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: .3rem; margin: auto; width: .25rem; height: .25rem; border-radius: 50%; background: var(--blue); }
+    .save-count { font-size: .66rem; padding: .1rem .35rem; border-radius: .35rem; background: var(--line); margin-left: .3rem; }
+    .nav-actions { display: flex; align-items: center; gap: 1.1rem; margin-left: auto; }
+    .language-control { display: flex; align-items: center; gap: .4rem; }
+    .language-control svg { width: 1rem; height: 1rem; color: var(--muted); }
+    select { background: transparent; border: 0; color: var(--ink); padding: .65rem .25rem; font-size: .8rem; max-width: 10rem; }
+    option { color: var(--ink); background: var(--surface); }
+    .subtle-button { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; padding: .65rem 1rem; border: 1px solid var(--line); border-radius: 2rem; background: var(--surface); font-size: .78rem; font-weight: 600; transition: box-shadow .2s, transform .2s; }
+    .subtle-button:hover { box-shadow: 0 3px 12px rgb(0 0 0 / .06); }
+    .subtle-button svg { width: 1rem; height: 1rem; }
+    .hero { display: grid; grid-template-columns: 1.25fr 1fr; align-items: center; gap: 4rem; padding: 4rem 0 4.4rem; }
+    .hero:has(.hero-art[hidden]) { grid-template-columns: 1fr; }
+    .eyebrow { display: flex; align-items: center; gap: .5rem; color: var(--blue); font-size: .67rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+    .eyebrow svg { width: .9rem; height: .9rem; }
+    h1 { margin: 1.15rem 0 1.1rem; font-size: clamp(2.8rem, 4.85vw, 4.55rem); font-weight: 710; line-height: 1.045; letter-spacing: -.06em; overflow-wrap: anywhere; }
+    h1 span { display: block; color: #7c8392; }
+    .hero-description { max-width: 31rem; margin: 0; color: var(--muted); font-size: .98rem; line-height: 1.75; white-space: pre-line; }
+    .hero-bottom { display: flex; align-items: center; flex-wrap: wrap; gap: 1.6rem; margin-top: 1.7rem; }
+    .primary { display: inline-flex; align-items: center; justify-content: center; gap: .9rem; background: var(--blue); color: #fff; border-radius: 2rem; padding: .8rem 1.2rem; font-size: .8rem; font-weight: 560; box-shadow: 0 4px 12px rgb(0 105 217 / .1); transition: background .2s, transform .2s; }
+    .primary:hover { background: #005bbb; }
+    .primary svg { width: 1rem; height: 1rem; }
+    .hero-note { font-size: .73rem; color: var(--muted); display: inline-flex; align-items: center; gap: .4rem; }
+    .hero-note svg { width: .85rem; height: .85rem; }
+    .hero-art { position: relative; display: grid; place-items: center; min-height: 20rem; isolation: isolate; }
+    .halo { position: absolute; width: 19rem; height: 19rem; border-radius: 50%; z-index: -2; background: radial-gradient(circle at 27% 24%, #e4f3ff, #c0d7f5 43%, #b4c8f0 62%, #dddff4 82%); box-shadow: inset 0 0 30px rgb(255 255 255 / .8), 0 20px 50px rgb(164 187 232 / .15); transform: translate(1.5rem, .5rem); }
+    .halo::after { content: ""; position: absolute; width: 9rem; height: 9rem; border: 1px solid rgb(255 255 255 / .65); border-radius: 50%; inset: 5rem; }
+    .floating-icon { position: absolute; z-index: 2; display: grid; place-items: center; width: 4.2rem; height: 4.2rem; border-radius: 1.2rem; background: linear-gradient(145deg, #fff, #f1f5fb); border: 1px solid #fff; color: #4679be; box-shadow: 0 10px 22px rgb(43 69 107 / .1), inset 0 -3px 5px rgb(174 188 214 / .12); }
+    .floating-icon svg { width: 2rem; height: 2rem; stroke-width: 1.6; }
+    .floating-icon.one { left: 7%; top: 9%; transform: rotate(-13deg); }
+    .floating-icon.two { right: 1%; bottom: 10%; transform: rotate(13deg); color: #968267; }
+    .collection-preview { width: 18rem; padding: 1.3rem; border-radius: 1.5rem; background: rgb(255 255 255 / .79); border: 1px solid #fff; backdrop-filter: blur(18px); box-shadow: 0 20px 40px rgb(63 85 128 / .12), 0 2px 5px rgb(63 85 128 / .03); transform: rotate(-5deg); }
+    .preview-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.15rem; color: #6c7890; font-size: .57rem; font-weight: 650; letter-spacing: .16em; }
+    .preview-heading svg { width: .95rem; height: .95rem; color: #6a8eae; }
+    .preview-row { display: flex; align-items: center; gap: .7rem; padding: .7rem 0; color: #242b3b; }
+    .preview-row + .preview-row { border-top: 1px solid rgb(139 151 177 / .15); }
+    .preview-row strong { display: block; font-size: .79rem; font-weight: 630; }
+    .preview-row small { font-size: .59rem; color: #778398; }
+    .preview-row > svg { width: .9rem; margin-left: auto; color: #7f8ba1; }
+    .preview-row .resource-icon { width: 2.35rem; height: 2.35rem; font-size: .85rem; border-radius: .7rem; }
+    .art-caption { position: absolute; bottom: -1.3rem; left: 0; right: 0; text-align: center; color: #818795; font-size: .62rem; letter-spacing: .025em; }
+    .collection-strip { display: flex; align-items: center; gap: 1.4rem; padding: 1.15rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 2.5rem; }
+    .strip-label { display: flex; align-items: center; gap: .6rem; font-size: .72rem; font-weight: 600; }
+    .strip-label svg { width: .9rem; height: .9rem; color: var(--muted); }
+    .strip-separator { height: 1rem; width: 1px; background: var(--line); }
+    .strip-stat { font-size: .73rem; color: var(--muted); }
+    .strip-stat strong { color: var(--ink); font-weight: 600; margin-right: .25rem; }
+    .strip-end { margin-left: auto; font-size: .69rem; color: var(--muted); display: flex; align-items: center; gap: .4rem; }
+    .status-dot { display: inline-block; width: .35rem; height: .35rem; border-radius: 50%; background: #34a47b; }
+    .library { display: grid; grid-template-columns: 12.2rem minmax(0, 1fr); gap: 2.7rem; align-items: start; padding-bottom: 4rem; }
+    .sidebar { position: sticky; top: 7.2rem; }
+    .sidebar-label { font-size: .6rem; color: var(--muted); font-weight: 650; letter-spacing: .12em; text-transform: uppercase; margin: .35rem 0 1rem .8rem; }
+    .category-list { display: flex; flex-direction: column; gap: .25rem; }
+    .category { width: 100%; display: flex; align-items: center; gap: .7rem; text-align: left; border-radius: .7rem; padding: .7rem .8rem; background: transparent; color: var(--muted); font-size: .77rem; transition: background .15s, color .15s; }
+    .category:hover { color: var(--ink); background: var(--line); }
+    .category[aria-pressed="true"] { color: var(--blue); background: var(--blue-soft); font-weight: 600; }
+    .category svg { width: 1rem; height: 1rem; }
+    .category-name { overflow-wrap: anywhere; }
+    .category-count { margin-left: auto; font-size: .65rem; opacity: .85; padding-left: .5rem; }
+    .category.nested { padding-left: calc(.8rem + min(var(--depth), 3) * .85rem); font-size: .71rem; }
+    .category.nested svg { width: .8rem; height: .8rem; }
+    .sidebar-note { margin: 2rem .8rem 0; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .71rem; line-height: 1.8; }
+    .sidebar-note svg { margin-bottom: .6rem; width: 1.4rem; height: 1.4rem; color: #8b94a7; }
+    .sidebar-note strong { display: block; color: var(--ink); font-size: .78rem; font-weight: 600; margin-bottom: .35rem; }
+    .sidebar-note p { margin: 0; }
+    .toolbar { display: flex; gap: .8rem; align-items: center; margin-bottom: 1.8rem; }
+    .search-box { display: flex; align-items: center; gap: .65rem; background: var(--surface); border: 1px solid var(--line); border-radius: .85rem; padding: .25rem .85rem; flex: 1; min-width: 0; box-shadow: 0 2px 3px rgb(0 0 0 / .015); }
+    .search-box:focus-within { border-color: var(--blue); outline: 3px solid var(--blue-soft); }
+    .search-box > svg { width: 1rem; color: var(--muted); }
+    .search-box input { width: 100%; min-width: 0; background: transparent; border: 0; outline: none; color: var(--ink); padding: .6rem 0; font-size: .78rem; }
+    .search-box input::placeholder { color: var(--muted); opacity: 1; }
+    .search-box kbd { font: .6rem inherit; border: 1px solid var(--line); color: var(--muted); padding: .1rem .35rem; border-radius: .25rem; white-space: nowrap; }
+    .clear-search { background: transparent; display: grid; place-items: center; min-width: 1.7rem; min-height: 1.7rem; }
+    .clear-search svg { width: .9rem; height: .9rem; }
+    .view-switch { display: flex; padding: .25rem; background: #eceef2; border-radius: .7rem; }
+    .view-button { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; background: transparent; color: var(--muted); border-radius: .5rem; }
+    .view-button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 4px rgb(0 0 0 / .08); }
+    .view-button svg { width: 1rem; height: 1rem; }
+    .results-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.2rem; }
+    h2 { font-size: 1.45rem; font-weight: 650; line-height: 1.2; letter-spacing: -.035em; margin: 0 0 .35rem; overflow-wrap: anywhere; }
+    .result-count { font-size: .72rem; color: var(--muted); margin: 0; }
+    .sort-control { display: flex; align-items: center; gap: .3rem; white-space: nowrap; color: var(--muted); padding-top: .1rem; }
+    .sort-control svg { width: .9rem; height: .9rem; }
+    .sort-control select { font-size: .7rem; padding-top: .2rem; }
+    .section-heading { margin: 2.2rem 0 1rem; }
+    .section-heading:first-child { margin-top: .5rem; }
+    .section-heading h3 { margin: 0; font-size: .92rem; font-weight: 620; letter-spacing: -.02em; }
+    .section-heading p { margin: .3rem 0 0; font-size: .74rem; color: var(--muted); white-space: pre-line; }
+    .section-heading .section-path { display: block; font-size: .65rem; color: var(--muted); margin-bottom: .35rem; }
+    .resource-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+    .resource-card { display: flex; flex-direction: column; min-width: 0; position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.3rem; transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease; }
+    .resource-card:hover { transform: translateY(-3px); border-color: #cbd5e4; box-shadow: var(--shadow); }
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: .6rem; margin-bottom: 1rem; }
+    .resource-icon { display: grid; place-items: center; width: 2.65rem; height: 2.65rem; border-radius: .85rem; background: var(--tile-bg, #e9f2ff); color: var(--tile-ink, #3976b9); font-size: 1.12rem; font-weight: 700; letter-spacing: -.055em; flex-shrink: 0; }
+    .bookmark { display: grid; place-items: center; background: transparent; color: #9298a4; border-radius: .5rem; width: 2rem; height: 2rem; margin: -.3rem -.5rem 0 0; }
+    .bookmark svg { width: 1rem; height: 1rem; }
+    .bookmark:hover { background: var(--bg); color: var(--blue); }
+    .bookmark[aria-pressed="true"] { color: var(--blue); }
+    .bookmark[aria-pressed="true"] svg { fill: var(--blue-soft); }
+    .resource-card h4 { margin: 0 0 .4rem; font-size: .96rem; font-weight: 650; line-height: 1.35; letter-spacing: -.025em; overflow-wrap: anywhere; }
+    .resource-card h4 a:hover { color: var(--blue); }
+    .entry-path { display: block; color: var(--muted); font-size: .6rem; line-height: 1.5; margin-bottom: .3rem; overflow-wrap: anywhere; }
+    .card-description { font-size: .75rem; line-height: 1.8; color: var(--muted); margin: 0 0 1.2rem; white-space: pre-line; overflow-wrap: anywhere; }
+    .card-footer { display: flex; justify-content: space-between; align-items: center; gap: .5rem; margin-top: auto; padding-top: .85rem; border-top: 1px solid var(--line); min-width: 0; }
+    .category-tag { padding: .22rem .5rem; border-radius: .35rem; background: var(--bg); color: var(--muted); font-size: .6rem; max-width: 80%; overflow-wrap: anywhere; }
+    .visit-link { display: grid; place-items: center; color: var(--muted); min-width: 1.8rem; min-height: 1.8rem; border-radius: .4rem; }
+    .visit-link svg { width: .95rem; height: .95rem; }
+    .visit-link:hover { background: var(--blue-soft); color: var(--blue); }
+    .resource-grid.list-view { grid-template-columns: 1fr; }
+    .list-view .resource-card { display: grid; grid-template-columns: 2.65rem minmax(0, 1fr) auto; column-gap: 1.2rem; padding: 1.2rem; }
+    .list-view .card-top { display: contents; }
+    .list-view .resource-icon { grid-column: 1; grid-row: 1 / 4; }
+    .list-view .bookmark { grid-column: 3; grid-row: 1; margin: 0; }
+    .list-view .card-text { grid-column: 2; grid-row: 1 / 3; }
+    .list-view .card-description { margin-bottom: .5rem; }
+    .list-view .card-footer { grid-column: 2 / 4; padding-top: .5rem; border: 0; }
+    .empty { padding: 4rem 1rem; text-align: center; border: 1px dashed var(--line); border-radius: var(--radius); background: var(--surface); }
+    .empty > svg { color: #8797b1; width: 2.3rem; height: 2.3rem; margin-bottom: 1rem; }
+    .empty h3 { margin: 0; font-size: 1.1rem; font-weight: 600; }
+    .empty p { color: var(--muted); font-size: .8rem; margin: .6rem 0 1.5rem; }
+    .footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; padding: 1.8rem 0 2.2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .68rem; }
+    .footer-brand { display: flex; align-items: center; gap: .5rem; }
+    .footer-brand svg { width: 1rem; height: 1rem; color: #8490a6; }
+    .footer-actions { display: flex; gap: 1.5rem; }
+    .text-button { padding: .4rem 0; background: transparent; color: var(--muted); font-size: inherit; }
+    .text-button:hover { color: var(--blue); }
+    .toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); max-width: calc(100% - 2rem); width: max-content; padding: .85rem 1.2rem; background: var(--ink); color: var(--surface); border-radius: .85rem; box-shadow: var(--shadow); font-size: .8rem; z-index: 50; }
+    dialog { width: min(30rem, calc(100% - 2rem)); max-height: calc(100dvh - 3rem); border: 1px solid var(--line); border-radius: 1.5rem; padding: 2rem; background: var(--surface); color: var(--ink); box-shadow: 0 25px 100px rgb(0 0 0 / .2); }
+    dialog::backdrop { background: rgb(20 27 42 / .3); backdrop-filter: blur(6px); }
+    .dialog-top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .dialog-top h2 { font-size: 1.5rem; margin: 0; }
+    .close-dialog { display: grid; place-items: center; background: var(--bg); width: 2rem; height: 2rem; border-radius: 50%; }
+    dialog p { color: var(--muted); font-size: .85rem; line-height: 1.8; }
+    dialog .primary { margin-top: .5rem; }
+    .load-error { padding: .9rem 1.2rem; border: 1px solid #eab4aa; border-radius: .75rem; color: #943c2c; background: #fff3ef; font-size: .8rem; margin-top: 1rem; overflow-wrap: anywhere; }
+    @media (min-width: 1600px) { .hero { padding-block: 5rem; } }
+    @media (max-width: 1150px) {
+      .wrap { width: calc(100% - 4rem); }
+      .nav { gap: 2rem; }
+      .hero { gap: 2rem; }
+      .hero-art { transform: scale(.9); }
+      .library { grid-template-columns: 11rem minmax(0, 1fr); gap: 1.7rem; }
+      .resource-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 800px) {
+      .wrap { width: calc(100% - 2.5rem); }
+      .nav { height: auto; min-height: 5rem; gap: 1rem; flex-wrap: wrap; padding-block: 1rem .65rem; }
+      .brand { font-size: 1rem; }
+      .brand-mark { width: 1.7rem; }
+      .nav-tabs { order: 3; width: 100%; justify-content: center; gap: 2rem; }
+      .nav-tab { padding-block: .5rem; }
+      .nav-tab[aria-pressed="true"]::after { bottom: 0; }
+      .nav-actions { gap: .6rem; }
+      .open-label { display: none; }
+      #open-file { width: 2.25rem; height: 2.25rem; padding: 0; }
+      .hero { padding: 2.4rem 0; gap: 0; grid-template-columns: 1fr; }
+      h1 { font-size: clamp(2.5rem, 8.8vw, 4.5rem); }
+      .hero-description { max-width: 36rem; font-size: .9rem; }
+      .hero-art { display: none; }
+      .hero-bottom { gap: 1rem; }
+      .collection-strip { margin-bottom: 1.7rem; gap: .9rem; flex-wrap: wrap; }
+      .strip-end { display: none; }
+      .library { display: block; }
+      .sidebar { position: static; margin-bottom: 1.3rem; }
+      .sidebar-label, .sidebar-note { display: none; }
+      .category-list { flex-direction: row; overflow-x: auto; padding: .3rem .15rem .65rem; scrollbar-width: thin; }
+      .category { width: auto; flex: 0 0 auto; padding: .65rem .85rem; }
+      .category.nested { padding-left: .85rem; }
+      .category.nested svg { display: none; }
+      .category-count { padding: 0; }
+      .toolbar { margin-bottom: 1.4rem; }
+      .sidebar + .catalogue { scroll-margin-top: 8rem; }
+      .footer { font-size: .65rem; }
+    }
+    @media (max-width: 480px) {
+      .wrap { width: calc(100% - 2rem); }
+      .language-control svg { display: none; }
+      .language-control select { font-size: .73rem; max-width: 7rem; }
+      .resource-grid { grid-template-columns: 1fr; }
+      .resource-card { padding: 1.2rem; }
+      .card-top { margin-bottom: .8rem; }
+      .card-description { font-size: .8rem; }
+      .bookmark, .visit-link { width: 2.75rem; height: 2.75rem; }
+      .bookmark { margin-top: -.5rem; }
+      .strip-label { display: none; }
+      .strip-separator { display: none; }
+      .collection-strip { gap: 1.2rem; }
+      .search-box kbd { display: none; }
+      h2 { font-size: 1.3rem; }
+      .results-top { gap: .5rem; }
+      .list-view .resource-card { grid-template-columns: 2.65rem minmax(0, 1fr) 2rem; gap: .8rem; }
+      .list-view .bookmark { width: 2rem; height: 2rem; }
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #151619; --surface: #202226; --ink: #f2f3f6; --muted: #a1a6b2; --line: #34373d; --blue: #6cafff; --blue-soft: #20354e; --glass: rgb(21 22 25 / .87); --shadow: 0 12px 36px rgb(0 0 0 / .2); }
+      .primary { background: #297add; color: white; }
+      .primary:hover { background: #1c6bcb; }
+      .view-switch { background: #101114; }
+      h1 span { color: #999faa; }
+      .halo { opacity: .55; }
+      .collection-preview { background: rgb(235 244 255 / .9); }
+      .resource-icon { background: color-mix(in srgb, var(--tile-bg, #e9f2ff) 80%, #fff); }
+      .resource-card:hover { border-color: #626e82; }
+      .load-error { background: #3b2522; color: #ffc3b7; border-color: #775048; }
+    }
+    @media (prefers-reduced-transparency: reduce) {
+      .topbar, .collection-preview { backdrop-filter: none; -webkit-backdrop-filter: none; }
+      .topbar { background: var(--bg); }
+      .collection-preview { background: #f4f8fd; }
+      dialog::backdrop { backdrop-filter: none; background: rgb(20 27 42 / .65); }
+    }
+    @media (prefers-contrast: more) {
+      :root { --muted: #454c58; --line: #8a929e; --glass: var(--bg); }
+      .topbar { backdrop-filter: none; }
+      .resource-card { border-color: var(--muted); }
+      .category-tag { color: var(--ink); }
+    }
+    @media (prefers-contrast: more) and (prefers-color-scheme: dark) { :root { --muted: #d1d5de; --line: #88919f; } }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+      .resource-card:hover, button:active, .primary:active { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#catalogue" data-i18n="skip">Skip to resources</a>
+  <header class="topbar">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="#" aria-label="The Awesome List home"><svg class="brand-mark" aria-hidden="true" viewBox="0 0 32 32"><path d="M16 3v26M3 16h26M6.8 6.8l18.4 18.4M6.8 25.2 25.2 6.8"/></svg>the awesome list<span style="color:var(--blue)">.</span></a>
+      <div class="nav-tabs">
+        <button type="button" class="nav-tab" id="discover-tab" aria-pressed="true" data-i18n="discover">Discover</button>
+        <button type="button" class="nav-tab" id="saved-tab" aria-pressed="false"><span data-i18n="saved">Saved</span><span class="save-count" id="save-count" hidden>0</span></button>
+      </div>
+      <div class="nav-actions">
+        <label class="language-control"><span data-icon="globe"></span><span class="sr-only" data-i18n="language">Language</span><select id="locale"></select></label>
+        <button type="button" id="open-file" class="subtle-button"><span class="open-label" data-i18n="open">Open collection</span><span data-icon="upload"></span></button>
+        <input type="file" id="file-input" accept=".json,application/json" hidden>
+      </div>
+    </nav>
+  </header>
+  <main class="wrap">
+    <div id="load-error" class="load-error" role="alert" hidden></div>
+    <section class="hero" aria-labelledby="collection-title">
+      <div>
+        <div class="eyebrow"><span data-icon="sparkles"></span><span data-i18n="eyebrow">Less searching. More discovering.</span></div>
+        <h1 id="collection-title"></h1>
+        <p class="hero-description" id="collection-description"></p>
+        <div class="hero-bottom"><a class="primary" href="#catalogue"><span data-i18n="explore">Explore the collection</span><span data-icon="arrow-right"></span></a><span class="hero-note"><span data-icon="heart"></span><span data-i18n="heroNote">Good things, all in one place.</span></span></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="halo"></div>
+        <div class="floating-icon one"><span data-icon="code"></span></div>
+        <div class="floating-icon two"><span data-icon="sparkles"></span></div>
+        <div class="collection-preview"><div class="preview-heading"><span data-i18n="inside">INSIDE THE COLLECTION</span><span data-icon="layers"></span></div><div id="preview-rows"></div></div>
+        <div class="art-caption" data-i18n="artCaption">Your next great find is in here.</div>
+      </div>
+    </section>
+    <div class="collection-strip">
+      <span class="strip-label"><span data-icon="layers"></span><span data-i18n="atGlance">The collection, at a glance</span></span><span class="strip-separator"></span>
+      <span class="strip-stat"><strong id="total-resources">0</strong><span data-i18n="resources">resources</span></span>
+      <span class="strip-stat"><strong id="total-collections">0</strong><span data-i18n="collections">collections</span></span>
+      <span class="strip-stat"><strong id="total-languages">0</strong><span data-i18n="languages">languages</span></span>
+      <span class="strip-end"><span class="status-dot"></span><span data-i18n="ready">Ready to explore</span></span>
+    </div>
+    <div class="library">
+      <aside class="sidebar" aria-label="Collection filters">
+        <p class="sidebar-label" data-i18n="browse">Browse collections</p>
+        <div class="category-list" id="categories"></div>
+        <div class="sidebar-note"><span data-icon="sparkles"></span><strong data-i18n="sidebarTitle">Find your next favorite.</strong><p data-i18n="sidebarText">A little inspiration for whatever you're making next. Save the good stuff for later.</p></div>
+      </aside>
+      <section class="catalogue" id="catalogue" aria-labelledby="results-title" tabindex="-1">
+        <div class="toolbar">
+          <div class="search-box"><span data-icon="search"></span><label class="sr-only" for="search" data-i18n="searchLabel">Search resources</label><input type="search" id="search" placeholder="Find something awesome…" autocomplete="off"><button type="button" id="clear-search" class="clear-search" hidden><span data-icon="close"></span></button><kbd aria-hidden="true">/</kbd></div>
+          <div class="view-switch" role="group" aria-label="Resource layout"><button type="button" class="view-button" id="grid-view" aria-pressed="true"><span data-icon="grid"></span></button><button type="button" class="view-button" id="list-view" aria-pressed="false"><span data-icon="list"></span></button></div>
+        </div>
+        <div class="results-top"><div><h2 id="results-title"></h2><p class="result-count" id="result-count" role="status" aria-live="polite" aria-atomic="true"></p></div><label class="sort-control"><span data-icon="sort"></span><span class="sr-only" data-i18n="sort">Sort resources</span><select id="sort"><option value="original" data-i18n="collectionOrder">Collection order</option><option value="az" data-i18n="az">Name: A–Z</option></select></label></div>
+        <div id="results"></div>
+      </section>
+    </div>
+    <footer class="footer"><span class="footer-brand"><span data-icon="sparkles"></span><span data-i18n="footer">A home for things worth discovering.</span></span><div class="footer-actions"><button type="button" class="text-button" id="about-button" data-i18n="about">About this collection</button><a class="text-button" href="#" data-i18n="backTop">Back to top ↑</a></div></footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <dialog id="about-dialog" aria-labelledby="about-title"><div class="dialog-top"><h2 id="about-title" data-i18n="aboutTitle">A place for good finds.</h2><button type="button" class="close-dialog" id="close-dialog"><span data-icon="close"></span></button></div><p data-i18n="aboutText">Explore a collection, make it your own. Search for something specific, browse a category, or save a resource to come back to later. Your saved items stay in this browser.</p><p id="collection-origin"></p><button type="button" class="primary" id="dialog-open"><span data-i18n="open">Open collection</span><span data-icon="upload"></span></button></dialog>
+  <noscript><p class="wrap">Enable JavaScript to browse this collection. The embedded collection data is available in this HTML file.</p></noscript>
+
+  <!-- Replace this JSON with an object following data/awesome_list.schema.json.
+       When embedding generated JSON, escape '<' as '\u003c' to protect the script boundary.
+       Alternatively open a JSON file using the page's Open collection button. -->
+  <script type="application/json" id="awesome-data">
+{
+  "defaultLocale": "en",
+  "title": {
+    "en": "Browsers",
+    "zh-CN": "\u6d4f\u89c8\u5668",
+    "zh-HK": "\u700f\u89bd\u5668"
+  },
+  "sections": [
+    {
+      "title": {
+        "en": "browsers",
+        "zh-CN": "\u6d4f\u89c8\u5668",
+        "zh-HK": "\u700f\u89bd\u5668"
+      },
+      "description": {
+        "en": "Browser automation tools, MCP servers, and AI-powered browsers for agentic web workflows.",
+        "zh-CN": "\u9762\u5411 AI \u667a\u80fd\u4f53\u7684\u6d4f\u89c8\u5668\u81ea\u52a8\u5316\u5de5\u5177\u3001MCP \u670d\u52a1\u5668\u548c AI \u9a71\u52a8\u6d4f\u89c8\u5668\u3002",
+        "zh-HK": "\u9762\u5411 AI \u667a\u80fd\u9ad4\u7684\u700f\u89bd\u5668\u81ea\u52d5\u5316\u5de5\u5177\u3001MCP \u4f3a\u670d\u5668\u53ca AI \u9a45\u52d5\u700f\u89bd\u5668\u3002"
+      },
+      "entries": [
+        {
+          "name": {
+            "en": "chrome-devtools-mcp",
+            "zh-CN": "chrome-devtools-mcp",
+            "zh-HK": "chrome-devtools-mcp"
+          },
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "description": {
+            "en": "Chrome DevTools for coding agents",
+            "zh-CN": "\u9762\u5411\u7f16\u7a0b\u667a\u80fd\u4f53\u7684 Chrome DevTools",
+            "zh-HK": "\u70ba\u7de8\u7a0b\u667a\u80fd\u9ad4\u63d0\u4f9b\u7684 Chrome DevTools"
+          }
+        },
+        {
+          "name": {
+            "en": "playwright-mcp",
+            "zh-CN": "playwright-mcp",
+            "zh-HK": "playwright-mcp"
+          },
+          "url": "https://github.com/microsoft/playwright-mcp",
+          "description": {
+            "en": "Playwright MCP server",
+            "zh-CN": "Playwright MCP \u670d\u52a1\u5668",
+            "zh-HK": "Playwright MCP \u4f3a\u670d\u5668"
+          }
+        },
+        {
+          "name": {
+            "en": "browser-use",
+            "zh-CN": "browser-use",
+            "zh-HK": "browser-use"
+          },
+          "url": "https://github.com/browser-use/browser-use",
+          "description": {
+            "en": "Agents that use the browser.",
+            "zh-CN": "\u4f7f\u7528\u6d4f\u89c8\u5668\u7684\u667a\u80fd\u4f53\u3002",
+            "zh-HK": "\u4f7f\u7528\u700f\u89bd\u5668\u7684\u667a\u80fd\u9ad4\u3002"
+          }
+        },
+        {
+          "name": {
+            "en": "OpenAI Atlas",
+            "zh-CN": "OpenAI Atlas",
+            "zh-HK": "OpenAI Atlas"
+          },
+          "url": "",
+          "description": {
+            "en": "",
+            "zh-CN": "",
+            "zh-HK": ""
+          }
+        },
+        {
+          "name": {
+            "en": "steel-browser",
+            "zh-CN": "steel-browser",
+            "zh-HK": "steel-browser"
+          },
+          "url": "https://github.com/steel-dev/steel-browser",
+          "description": {
+            "en": "\ud83d\udd25 Open Source Browser API for AI Agents & Apps. Steel Browser is a batteries-included browser sandbox that lets you automate the web without worrying about infrastructure.",
+            "zh-CN": "\ud83d\udd25 \u9762\u5411 AI \u667a\u80fd\u4f53\u4e0e\u5e94\u7528\u7684\u5f00\u6e90\u6d4f\u89c8\u5668 API\u3002Steel Browser \u662f\u4e00\u4e2a\u5f00\u7bb1\u5373\u7528\u7684\u6d4f\u89c8\u5668\u6c99\u7bb1\uff0c\u8ba9\u4f60\u65e0\u9700\u64cd\u5fc3\u57fa\u7840\u8bbe\u65bd\u5373\u53ef\u81ea\u52a8\u5316\u7f51\u9875\u3002",
+            "zh-HK": "\ud83d\udd25 \u70ba AI \u667a\u80fd\u9ad4\u53ca\u61c9\u7528\u800c\u8a2d\u7684\u958b\u6e90\u700f\u89bd\u5668 API\u3002Steel Browser \u662f\u4e00\u500b\u958b\u7bb1\u5373\u7528\u7684\u700f\u89bd\u5668\u6c99\u76d2\uff0c\u8b93\u4f60\u7121\u9700\u64d4\u5fc3\u57fa\u790e\u8a2d\u65bd\u5373\u53ef\u81ea\u52d5\u5316\u7db2\u9801\u3002"
+          }
+        },
+        {
+          "name": {
+            "en": "stagehand",
+            "zh-CN": "stagehand",
+            "zh-HK": "stagehand"
+          },
+          "url": "https://github.com/browserbase/stagehand",
+          "description": {
+            "en": "The SDK to extract data and interact with any site on the web. Get started with Claude Code, Codex, Eve, Mastra, and more.",
+            "zh-CN": "\u7528\u4e8e\u63d0\u53d6\u6570\u636e\u5e76\u4e0e\u7f51\u7edc\u4e0a\u4efb\u4f55\u7f51\u7ad9\u4ea4\u4e92\u7684 SDK\u3002\u53ef\u642d\u914d Claude Code\u3001Codex\u3001Eve\u3001Mastra \u7b49\u4f7f\u7528\u3002",
+            "zh-HK": "\u7528\u65bc\u64f7\u53d6\u8cc7\u6599\u4e26\u8207\u7db2\u7d61\u4e0a\u4efb\u4f55\u7db2\u7ad9\u4e92\u52d5\u7684 SDK\u3002\u53ef\u914d\u5408 Claude Code\u3001Codex\u3001Eve\u3001Mastra \u7b49\u4f7f\u7528\u3002"
+          }
+        },
+        {
+          "name": {
+            "en": "skyvern",
+            "zh-CN": "skyvern",
+            "zh-HK": "skyvern"
+          },
+          "url": "https://github.com/Skyvern-AI/skyvern",
+          "description": {
+            "en": "Automate browser based workflows with AI",
+            "zh-CN": "\u4f7f\u7528 AI \u81ea\u52a8\u5316\u57fa\u4e8e\u6d4f\u89c8\u5668\u7684\u5de5\u4f5c\u6d41",
+            "zh-HK": "\u4f7f\u7528 AI \u81ea\u52d5\u5316\u57fa\u65bc\u700f\u89bd\u5668\u7684\u5de5\u4f5c\u6d41\u7a0b"
+          }
+        },
+        {
+          "name": {
+            "en": "nanobrowser",
+            "zh-CN": "nanobrowser",
+            "zh-HK": "nanobrowser"
+          },
+          "url": "https://github.com/nanobrowser/nanobrowser",
+          "description": {
+            "en": "Open-Source Chrome extension for AI-powered web automation. Run multi-agent workflows using your own LLM API key. Alternative to OpenAI Operator.",
+            "zh-CN": "\u7528\u4e8e AI \u9a71\u52a8\u7f51\u9875\u81ea\u52a8\u5316\u7684\u5f00\u6e90 Chrome \u6269\u5c55\u3002\u4f7f\u7528\u4f60\u81ea\u5df1\u7684 LLM API \u5bc6\u94a5\u8fd0\u884c\u591a\u667a\u80fd\u4f53\u5de5\u4f5c\u6d41\u3002OpenAI Operator \u7684\u66ff\u4ee3\u54c1\u3002",
+            "zh-HK": "\u7528\u65bc AI \u9a45\u52d5\u7db2\u9801\u81ea\u52d5\u5316\u7684\u958b\u6e90 Chrome \u64f4\u5145\u529f\u80fd\u3002\u4f7f\u7528\u4f60\u81ea\u5df1\u7684 LLM API \u91d1\u9470\u57f7\u884c\u591a\u667a\u80fd\u9ad4\u5de5\u4f5c\u6d41\u7a0b\u3002OpenAI Operator \u7684\u66ff\u4ee3\u54c1\u3002"
+          }
+        },
+        {
+          "name": {
+            "en": "computer-use-preview",
+            "zh-CN": "computer-use-preview",
+            "zh-HK": "computer-use-preview"
+          },
+          "url": "https://github.com/google-gemini/computer-use-preview",
+          "description": {
+            "en": "",
+            "zh-CN": "",
+            "zh-HK": ""
+          }
+        },
+        {
+          "name": {
+            "en": "browsernode",
+            "zh-CN": "browsernode",
+            "zh-HK": "browsernode"
+          },
+          "url": "https://github.com/lennybase/browsernode",
+          "description": {
+            "en": "\ud83c\udf10 Make websites accessible for AI agents. Automate tasks online with ease.",
+            "zh-CN": "\ud83c\udf10 \u8ba9\u7f51\u7ad9\u53ef\u4f9b AI \u667a\u80fd\u4f53\u8bbf\u95ee\u3002\u8f7b\u677e\u81ea\u52a8\u5316\u5728\u7ebf\u4efb\u52a1\u3002",
+            "zh-HK": "\ud83c\udf10 \u8b93\u7db2\u7ad9\u53ef\u4f9b AI \u667a\u80fd\u9ad4\u5b58\u53d6\u3002\u8f15\u9b06\u81ea\u52d5\u5316\u7dda\u4e0a\u4efb\u52d9\u3002"
+          }
+        },
+        {
+          "name": {
+            "en": "glide",
+            "zh-CN": "glide",
+            "zh-HK": "glide"
+          },
+          "url": "https://github.com/glide-browser/glide",
+          "description": {
+            "en": "An extensible and keyboard-focused web browser",
+            "zh-CN": "\u4e00\u6b3e\u53ef\u6269\u5c55\u4e14\u4ee5\u952e\u76d8\u4e3a\u6838\u5fc3\u7684\u7f51\u9875\u6d4f\u89c8\u5668",
+            "zh-HK": "\u4e00\u6b3e\u53ef\u64f4\u5145\u4e14\u4ee5\u9375\u76e4\u70ba\u6838\u5fc3\u7684\u7db2\u9801\u700f\u89bd\u5668"
+          }
+        },
+        {
+          "name": {
+            "en": "Scrapling",
+            "zh-CN": "Scrapling",
+            "zh-HK": "Scrapling"
+          },
+          "url": "https://github.com/D4Vinci/Scrapling",
+          "description": {
+            "en": "\ud83d\udd77\ufe0f \ufe0f An adaptive Web Scraping framework that handles everything from a single request to a full-scale crawl! Don't be shy, join here: https://discord.gg/EMgGbDceNQ",
+            "zh-CN": "\ud83d\udd77\ufe0f \ufe0f \u4e00\u4e2a\u81ea\u9002\u5e94\u7684\u7f51\u9875\u6293\u53d6\u6846\u67b6\uff0c\u4ece\u5355\u6b21\u8bf7\u6c42\u5230\u5168\u91cf\u722c\u53d6\u4e00\u5e94\u4ff1\u5168\uff01\u522b\u5bb3\u7f9e\uff0c\u52a0\u5165\u6211\u4eec\uff1ahttps://discord.gg/EMgGbDceNQ",
+            "zh-HK": "\ud83d\udd77\ufe0f \ufe0f \u4e00\u500b\u81ea\u9069\u61c9\u7684\u7db2\u9801\u64f7\u53d6\u6846\u67b6\uff0c\u7531\u55ae\u6b21\u8acb\u6c42\u5230\u5168\u91cf\u722c\u53d6\u4e00\u61c9\u4ff1\u5168\uff01\u5225\u5bb3\u7f9e\uff0c\u52a0\u5165\u6211\u5011\uff1ahttps://discord.gg/EMgGbDceNQ"
+          }
+        },
+        {
+          "name": {
+            "en": "BrowserOS",
+            "zh-CN": "BrowserOS",
+            "zh-HK": "BrowserOS"
+          },
+          "url": "https://github.com/browseros-ai/BrowserOS",
+          "description": {
+            "en": "\ud83c\udf10 The open-source Agentic browser; alternative to ChatGPT Atlas, Perplexity Comet, Dia.",
+            "zh-CN": "\ud83c\udf10 \u5f00\u6e90\u7684\u667a\u80fd\u4f53\u6d4f\u89c8\u5668\uff1bChatGPT Atlas\u3001Perplexity Comet\u3001Dia \u7684\u66ff\u4ee3\u54c1\u3002",
+            "zh-HK": "\ud83c\udf10 \u958b\u6e90\u7684\u667a\u80fd\u9ad4\u700f\u89bd\u5668\uff1bChatGPT Atlas\u3001Perplexity Comet\u3001Dia \u7684\u66ff\u4ee3\u54c1\u3002"
+          }
+        },
+        {
+          "name": {
+            "en": "agent-browser",
+            "zh-CN": "agent-browser",
+            "zh-HK": "agent-browser"
+          },
+          "url": "https://github.com/vercel-labs/agent-browser",
+          "description": {
+            "en": "Browser automation CLI for AI agents",
+            "zh-CN": "\u9762\u5411 AI \u667a\u80fd\u4f53\u7684\u6d4f\u89c8\u5668\u81ea\u52a8\u5316 CLI",
+            "zh-HK": "\u70ba AI \u667a\u80fd\u9ad4\u800c\u8a2d\u7684\u700f\u89bd\u5668\u81ea\u52d5\u5316 CLI"
+          }
+        },
+        {
+          "name": {
+            "en": "browser",
+            "zh-CN": "browser",
+            "zh-HK": "browser"
+          },
+          "url": "https://github.com/lightpanda-io/browser",
+          "description": {
+            "en": "Lightpanda: the headless browser designed for AI and automation",
+            "zh-CN": "Lightpanda\uff1a\u4e3a AI \u4e0e\u81ea\u52a8\u5316\u800c\u8bbe\u8ba1\u7684\u65e0\u5934\u6d4f\u89c8\u5668",
+            "zh-HK": "Lightpanda\uff1a\u70ba AI \u8207\u81ea\u52d5\u5316\u800c\u8a2d\u8a08\u7684\u7121\u982d\u700f\u89bd\u5668"
+          }
+        },
+        {
+          "name": {
+            "en": "bb-browser",
+            "zh-CN": "bb-browser",
+            "zh-HK": "bb-browser"
+          },
+          "url": "https://github.com/epiral/bb-browser",
+          "description": {
+            "en": "Your browser is the API. CLI + MCP server for AI agents to control Chrome with your login state.",
+            "zh-CN": "\u4f60\u7684\u6d4f\u89c8\u5668\u5c31\u662f API\u3002\u4e3a AI \u667a\u80fd\u4f53\u63d0\u4f9b CLI + MCP \u670d\u52a1\u5668\uff0c\u8ba9\u5176\u4ee5\u4f60\u7684\u767b\u5f55\u72b6\u6001\u63a7\u5236 Chrome\u3002",
+            "zh-HK": "\u4f60\u7684\u700f\u89bd\u5668\u5c31\u662f API\u3002\u70ba AI \u667a\u80fd\u9ad4\u63d0\u4f9b CLI + MCP \u4f3a\u670d\u5668\uff0c\u8b93\u5176\u4ee5\u4f60\u7684\u767b\u5165\u72c0\u614b\u63a7\u5236 Chrome\u3002"
+          }
+        },
+        {
+          "name": {
+            "en": "pinchtab",
+            "zh-CN": "pinchtab",
+            "zh-HK": "pinchtab"
+          },
+          "url": "https://github.com/pinchtab/pinchtab",
+          "description": {
+            "en": "High-performance browser automation bridge and multi-instance orchestrator with advanced stealth injection and real-time dashboard.",
+            "zh-CN": "\u9ad8\u6027\u80fd\u7684\u6d4f\u89c8\u5668\u81ea\u52a8\u5316\u6865\u63a5\u4e0e\u591a\u5b9e\u4f8b\u7f16\u6392\u5668\uff0c\u5177\u5907\u9ad8\u7ea7\u9690\u8eab\u6ce8\u5165\u4e0e\u5b9e\u65f6\u4eea\u8868\u677f\u3002",
+            "zh-HK": "\u9ad8\u6548\u80fd\u7684\u700f\u89bd\u5668\u81ea\u52d5\u5316\u6a4b\u63a5\u8207\u591a\u5be6\u4f8b\u7de8\u6392\u5668\uff0c\u5177\u5099\u9032\u968e\u96b1\u8eab\u6ce8\u5165\u8207\u5373\u6642\u5100\u8868\u677f\u3002"
+          }
+        },
+        {
+          "name": {
+            "en": "Browser Use CLI",
+            "zh-CN": "Browser Use CLI",
+            "zh-HK": "Browser Use CLI"
+          },
+          "url": "",
+          "description": {
+            "en": "",
+            "zh-CN": "",
+            "zh-HK": ""
+          }
+        },
+        {
+          "name": {
+            "en": "carbonyl",
+            "zh-CN": "carbonyl",
+            "zh-HK": "carbonyl"
+          },
+          "url": "https://github.com/fathyb/carbonyl",
+          "description": {
+            "en": "Chromium running inside your terminal",
+            "zh-CN": "\u5728\u7ec8\u7aef\u91cc\u8fd0\u884c\u7684 Chromium",
+            "zh-HK": "\u5728\u7d42\u7aef\u6a5f\u88e1\u904b\u884c\u7684 Chromium"
+          }
+        },
+        {
+          "name": {
+            "en": "web-access",
+            "zh-CN": "web-access",
+            "zh-HK": "web-access"
+          },
+          "url": "https://github.com/eze-is/web-access",
+          "description": {
+            "en": "\u7ed9 Claude Code \u88c5\u4e0a\u5b8c\u6574\u8054\u7f51\u80fd\u529b\u7684 skill\uff1a\u4e09\u5c42\u901a\u9053\u8c03\u5ea6 + \u6d4f\u89c8\u5668 CDP + \u5e76\u884c\u5206\u6cbb",
+            "zh-CN": "\u7ed9 Claude Code \u88c5\u4e0a\u5b8c\u6574\u8054\u7f51\u80fd\u529b\u7684 skill\uff1a\u4e09\u5c42\u901a\u9053\u8c03\u5ea6 + \u6d4f\u89c8\u5668 CDP + \u5e76\u884c\u5206\u6cbb",
+            "zh-HK": "\u70ba Claude Code \u88dd\u4e0a\u5b8c\u6574\u806f\u7db2\u80fd\u529b\u7684 skill\uff1a\u4e09\u5c64\u901a\u9053\u8abf\u5ea6 + \u700f\u89bd\u5668 CDP + \u4e26\u884c\u5206\u6cbb"
+          }
+        },
+        {
+          "name": {
+            "en": "browser-harness",
+            "zh-CN": "browser-harness",
+            "zh-HK": "browser-harness"
+          },
+          "url": "https://github.com/browser-use/browser-harness",
+          "description": {
+            "en": "Browser Harness | Self-healing harness that enables LLMs to complete any task.",
+            "zh-CN": "Browser Harness | \u81ea\u6108\u5f0f\u6846\u67b6\uff0c\u8ba9 LLM \u80fd\u591f\u5b8c\u6210\u4efb\u4f55\u4efb\u52a1\u3002",
+            "zh-HK": "Browser Harness | \u81ea\u7652\u5f0f\u6846\u67b6\uff0c\u8b93 LLM \u80fd\u5920\u5b8c\u6210\u4efb\u4f55\u4efb\u52d9\u3002"
+          }
+        },
+        {
+          "name": {
+            "en": "playwriter",
+            "zh-CN": "playwriter",
+            "zh-HK": "playwriter"
+          },
+          "url": "https://github.com/remorses/playwriter",
+          "description": {
+            "en": "Chrome extension & CLI to let agents control your browser. Runs Playwright snippets in a stateful sandbox. Available as CLI or MCP",
+            "zh-CN": "\u8ba9\u667a\u80fd\u4f53\u63a7\u5236\u4f60\u6d4f\u89c8\u5668\u7684 Chrome \u6269\u5c55\u4e0e CLI\u3002\u5728\u6709\u72b6\u6001\u7684\u6c99\u7bb1\u4e2d\u8fd0\u884c Playwright \u4ee3\u7801\u7247\u6bb5\u3002\u53ef\u4f5c\u4e3a CLI \u6216 MCP \u4f7f\u7528\u3002",
+            "zh-HK": "\u8b93\u667a\u80fd\u9ad4\u63a7\u5236\u4f60\u700f\u89bd\u5668\u7684 Chrome \u64f4\u5145\u529f\u80fd\u8207 CLI\u3002\u5728\u6709\u72c0\u614b\u7684\u6c99\u76d2\u4e2d\u57f7\u884c Playwright \u7a0b\u5f0f\u78bc\u7247\u6bb5\u3002\u53ef\u4f5c\u70ba CLI \u6216 MCP \u4f7f\u7528\u3002"
+          }
+        },
+        {
+          "name": {
+            "en": "ladybird",
+            "zh-CN": "ladybird",
+            "zh-HK": "ladybird"
+          },
+          "url": "https://github.com/LadybirdBrowser/ladybird",
+          "description": {
+            "en": "Truly independent web browser",
+            "zh-CN": "\u771f\u6b63\u72ec\u7acb\u7684\u7f51\u9875\u6d4f\u89c8\u5668",
+            "zh-HK": "\u771f\u6b63\u7368\u7acb\u7684\u7db2\u9801\u700f\u89bd\u5668"
+          }
+        },
+        {
+          "name": {
+            "en": "obscura",
+            "zh-CN": "obscura",
+            "zh-HK": "obscura"
+          },
+          "url": "https://github.com/h4ckf0r0day/obscura",
+          "description": {
+            "en": "The headless browser for AI agents and web scraping",
+            "zh-CN": "\u9762\u5411 AI \u667a\u80fd\u4f53\u548c\u7f51\u9875\u6293\u53d6\u7684\u65e0\u5934\u6d4f\u89c8\u5668",
+            "zh-HK": "\u70ba AI \u667a\u80fd\u9ad4\u53ca\u7db2\u9801\u64f7\u53d6\u800c\u8a2d\u7684\u7121\u982d\u700f\u89bd\u5668"
+          }
+        },
+        {
+          "name": {
+            "en": "camofox-browser",
+            "zh-CN": "camofox-browser",
+            "zh-HK": "camofox-browser"
+          },
+          "url": "https://github.com/jo-inc/camofox-browser",
+          "description": {
+            "en": "Stealth headless browser for AI agents \u2014 bypass Cloudflare, bot detection, and anti-scraping. Drop-in Puppeteer/Playwright replacement.",
+            "zh-CN": "\u9762\u5411 AI \u667a\u80fd\u4f53\u7684\u9690\u8eab\u65e0\u5934\u6d4f\u89c8\u5668 \u2014\u2014 \u7ed5\u8fc7 Cloudflare\u3001\u673a\u5668\u4eba\u68c0\u6d4b\u4e0e\u53cd\u6293\u53d6\u3002\u53ef\u76f4\u63a5\u66ff\u6362 Puppeteer/Playwright\u3002",
+            "zh-HK": "\u70ba AI \u667a\u80fd\u9ad4\u800c\u8a2d\u7684\u96b1\u8eab\u7121\u982d\u700f\u89bd\u5668 \u2014\u2014 \u7e5e\u904e Cloudflare\u3001\u6a5f\u5668\u4eba\u5075\u6e2c\u8207\u53cd\u64f7\u53d6\u3002\u53ef\u76f4\u63a5\u66ff\u63db Puppeteer/Playwright\u3002"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+  <script>
+    'use strict';
+    // Dependency-free renderer. Collection content is always inserted as text, never HTML.
+    const $ = (selector) => document.querySelector(selector);
+    const ICONS = {
+      sparkles: '<path d="m12 3 2.7 6.3L21 12l-6.3 2.7L12 21l-2.7-6.3L3 12l6.3-2.7Z"/><path d="m20 2 .7 1.3L22 4l-1.3.7L20 6l-.7-1.3L18 4l1.3-.7Z"/>',
+      globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c5 5 5 13 0 18-5-5-5-13 0-18Z"/>',
+      upload: '<path d="M12 16V3m-4 4 4-4 4 4M4 15v5h16v-5"/>',
+      'arrow-right': '<path d="M4 12h16m-6-6 6 6-6 6"/>',
+      external: '<path d="M7 17 17 7M7 7h10v10"/>',
+      heart: '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>',
+      code: '<path d="m8 7-5 5 5 5m8-10 5 5-5 5M14 4l-4 16"/>',
+      layers: '<path d="m12 3 10 5-10 5L2 8Zm-10 9 10 5 10-5M2 17l10 5 10-5"/>',
+      search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>',
+      close: '<path d="m6 6 12 12M6 18 18 6"/>',
+      grid: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+      list: '<path d="M8 5h13M8 12h13M8 19h13M3 5h.01M3 12h.01M3 19h.01"/>',
+      sort: '<path d="M8 4v16m-4-4 4 4 4-4M16 4v16m-4-12 4-4 4 4"/>',
+      bookmark: '<path d="M6 21V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v17l-6-4Z"/>',
+      design: '<path d="m12 3 9 9-9 9-9-9Z"/><path d="M3 12h18M12 3v18"/>',
+      bolt: '<path d="m13 2-9 12h7l-1 8L21 9h-8Z"/>',
+      book: '<path d="M12 5c-3-2-6-2-10-1v15c4-1 7-1 10 1 3-2 6-2 10-1V4c-4-1-7-1-10 1Zm0 0v15"/>',
+      branch: '<path d="M6 4v9a3 3 0 0 0 3 3h10m-4-4 4 4-4 4"/>'
+    };
+    function icon(name) {
+      const holder = document.createElement('span');
+      // Only constant icon markup enters this sink; no collection data is interpolated.
+      holder.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24">' + (ICONS[name] || ICONS.layers) + '</svg>';
+      return holder.firstElementChild;
+    }
+    document.querySelectorAll('[data-icon]').forEach((node) => node.replaceWith(icon(node.dataset.icon)));
+    const COPY = {
+      en: {
+        skip: 'Skip to resources', discover: 'Discover', saved: 'Saved', language: 'Language', open: 'Open collection',
+        eyebrow: 'Less searching. More discovering.', explore: 'Explore the collection', heroNote: 'Good things, all in one place.',
+        inside: 'INSIDE THE COLLECTION', artCaption: 'Your next great find is in here.', atGlance: 'The collection, at a glance',
+        resources: 'resources', collections: 'collections', languages: 'languages', ready: 'Ready to explore', browse: 'Browse collections',
+        sidebarTitle: 'Find your next favorite.', sidebarText: "A little inspiration for whatever you're making next. Save the good stuff for later.",
+        searchLabel: 'Search resources', searchPlaceholder: 'Find something awesome…', sort: 'Sort resources', collectionOrder: 'Collection order', az: 'Name: A–Z',
+        footer: 'A home for things worth discovering.', about: 'About this collection', backTop: 'Back to top ↑', aboutTitle: 'A place for good finds.',
+        aboutText: 'Explore a collection, make it your own. Search for something specific, browse a category, or save a resource to come back to later. Your saved items stay in this browser.',
+        all: 'All resources', savedTitle: 'Your saved finds', searchTitle: 'Search results', resultCount: '{count} resources to explore', savedCount: '{count} saved resources',
+        grid: 'Grid view', list: 'List view', clear: 'Clear search', close: 'Close', save: 'Save {name}', unsave: 'Unsave {name}', visit: 'Visit {name} (opens in a new tab)',
+        savedToast: 'Saved for a little later.', unsavedToast: 'Removed from your saved finds.', storageToast: 'Saved for this visit. Browser storage is unavailable.',
+        emptyTitle: 'A little room for discovery.', emptyText: 'No resources match these filters. Try another search or collection.',
+        emptySavedTitle: 'Keep the good stuff close.', emptySavedText: 'Tap the bookmark on a resource to save it here.', reset: 'Explore all resources',
+        untitled: 'Untitled collection', unnamed: 'Untitled resource', sample: 'This is an example collection. Open your own JSON collection to explore it here.',
+        loaded: 'Collection opened: {name}. Files are read locally in your browser.', embedded: 'This collection is included in the page. You can also open a JSON collection from your device.',
+        loadSuccess: 'Your collection is ready.', loadError: 'Could not open this collection. ', genericError: 'Choose valid JSON matching the AwesomeList schema.',
+        tooLarge: 'This file is too large to open here (maximum 10 MB).'
+      },
+      zh: {
+        skip: '跳转到资源', discover: '发现', saved: '已收藏', language: '语言', open: '打开清单',
+        eyebrow: '少一点寻找，多一点发现。', explore: '探索清单', heroNote: '好东西，汇聚一处。', inside: '清单一览', artCaption: '你的下一个心头好，就在这里。',
+        atGlance: '清单概览', resources: '项资源', collections: '个分类', languages: '种语言', ready: '开始探索', browse: '浏览分类',
+        sidebarTitle: '发现下一个心头好。', sidebarText: '为接下来的创作寻找灵感。收藏好东西，留待以后慢慢探索。',
+        searchLabel: '搜索资源', searchPlaceholder: '寻找值得收藏的好东西…', sort: '资源排序', collectionOrder: '清单顺序', az: '按名称排序',
+        footer: '为值得发现的事物，安一个家。', about: '关于这份清单', backTop: '返回顶部 ↑', aboutTitle: '好东西的聚集地。',
+        aboutText: '探索一份清单，建立自己的收藏。搜索资源、浏览分类，或保存感兴趣的内容。收藏记录保存在当前浏览器中。',
+        all: '全部资源', savedTitle: '你的收藏', searchTitle: '搜索结果', resultCount: '{count} 项资源，等你探索', savedCount: '已收藏 {count} 项资源',
+        grid: '网格视图', list: '列表视图', clear: '清除搜索', close: '关闭', save: '收藏 {name}', unsave: '取消收藏 {name}', visit: '访问 {name}（在新标签页中打开）',
+        savedToast: '已收藏，留待稍后探索。', unsavedToast: '已从收藏中移除。', storageToast: '已临时收藏。当前浏览器无法保存收藏记录。',
+        emptyTitle: '再试着找一找。', emptyText: '没有符合条件的资源。试试其他关键词或分类。', emptySavedTitle: '把喜欢的留在身边。', emptySavedText: '点击资源上的书签，即可在这里找到它。',
+        reset: '探索全部资源', untitled: '未命名清单', unnamed: '未命名资源', sample: '这是一份示例清单。你可以打开自己的 JSON 清单，在这里浏览。',
+        loaded: '已打开清单：{name}。文件仅在浏览器本地读取。', embedded: '这份清单已嵌入页面。你也可以从设备打开其他 JSON 清单。',
+        loadSuccess: '清单已准备就绪。', loadError: '无法打开这份清单。', genericError: '请选择符合 AwesomeList 格式的有效 JSON 文件。', tooLarge: '文件过大（最大支持 10 MB）。'
+      }
+    };
+    let data, sections = [], records = [], locales = [], locale = 'en', category = 'all', savedOnly = false, query = '', view = 'grid', sourceName = '';
+    let storageAvailable = true, toastTimer, saved = new Set();
+    try {
+      const previous = JSON.parse(localStorage.getItem('awesome-list:saved:v1') || '[]');
+      if (Array.isArray(previous)) saved = new Set(previous.filter((key) => typeof key === 'string'));
+    } catch { storageAvailable = false; }
+    function tr(key, params = {}) {
+      const dictionary = locale.toLowerCase().startsWith('zh') ? COPY.zh : COPY.en;
+      return Object.entries(params).reduce((text, [name, value]) => text.replaceAll('{' + name + '}', String(value)), dictionary[key] || COPY.en[key] || key);
+    }
+    function local(text) {
+      if (!text) return '';
+      return [text[locale], text[data.defaultLocale], ...Object.values(text)].find((value) => typeof value === 'string' && value.trim()) || '';
+    }
+    function el(tag, className, text) {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text !== undefined) node.textContent = text;
+      return node;
+    }
+    function safeUrl(value) {
+      if (!value) return null;
+      try { const url = new URL(value); return ['http:', 'https:'].includes(url.protocol) ? url.href : null; } catch { return null; }
+    }
+    function validate(value) {
+      const object = (node) => node !== null && typeof node === 'object' && !Array.isArray(node);
+      const fail = (path, expected) => { throw new Error(path + ' must be ' + expected + '.'); };
+      const text = (node, path) => { if (!object(node) || Object.values(node).some((item) => typeof item !== 'string')) fail(path, 'an object of translated strings'); };
+      const array = (node, path) => { if (!Array.isArray(node)) fail(path, 'an array'); };
+      if (!object(value)) fail('Collection', 'an object');
+      if (typeof value.defaultLocale !== 'string') fail('defaultLocale', 'a string');
+      text(value.title, 'title');
+      if ('description' in value) text(value.description, 'description');
+      array(value.sections, 'sections');
+      // Iterative validation allows deep, mixed section/entry trees without a recursive call stack.
+      const pending = value.sections.map((node, index) => ({node, kind: 'section', path: 'sections[' + index + ']'}));
+      while (pending.length) {
+        const {node, kind, path} = pending.pop();
+        if (!object(node)) fail(path, 'an object');
+        text(node[kind === 'section' ? 'title' : 'name'], path + (kind === 'section' ? '.title' : '.name'));
+        if (kind === 'entry' || 'description' in node) text(node.description, path + '.description');
+        if (kind === 'entry' && 'url' in node && typeof node.url !== 'string') fail(path + '.url', 'a string');
+        for (const field of kind === 'section' ? ['entries', 'sections'] : ['entries']) {
+          if (!(field in node)) continue;
+          array(node[field], path + '.' + field);
+          node[field].forEach((child, index) => pending.push({node: child, kind: field === 'sections' ? 'section' : 'entry', path: path + '.' + field + '[' + index + ']'}));
+        }
+      }
+    }
+    function indexCollection() {
+      sections = []; records = [];
+      const foundLocales = new Set([data.defaultLocale]);
+      const occurrences = new Map();
+      const discover = (text) => Object.keys(text || {}).forEach((key) => foundLocales.add(key));
+      discover(data.title); discover(data.description);
+      const pending = data.sections.map((node, index) => ({node, kind: 'section', path: 's' + index, ancestors: [], parents: []})).reverse();
+      while (pending.length) {
+        const item = pending.pop(), {node, kind, path, ancestors, parents} = item;
+        discover(kind === 'section' ? node.title : node.name); discover(node.description);
+        if (kind === 'section') {
+          const section = {node, id: path, ancestors, depth: ancestors.length};
+          sections.push(section);
+          const nextAncestors = [...ancestors, section];
+          [...(node.sections || [])].map((child, index) => ({node: child, kind: 'section', path: path + '.s' + index, ancestors: nextAncestors, parents: []})).reverse().forEach((child) => pending.push(child));
+          [...(node.entries || [])].map((child, index) => ({node: child, kind: 'entry', path: path + '.e' + index, ancestors: nextAncestors, parents: []})).reverse().forEach((child) => pending.push(child));
+        } else {
+          // Stable identity across language switches and reordering, scoped to the collection.
+          const baseIdentity = JSON.stringify([data.defaultLocale, data.title, ancestors.map((s) => s.node.title), parents.map((p) => p.name), node.name, node.url || '']);
+          const occurrence = occurrences.get(baseIdentity) || 0;
+          occurrences.set(baseIdentity, occurrence + 1);
+          const identity = baseIdentity + ':' + occurrence;
+          records.push({node, id: path, identity, order: records.length, ancestors, parents, section: ancestors[ancestors.length - 1]});
+          [...(node.entries || [])].map((child, index) => ({node: child, kind: 'entry', path: path + '.e' + index, ancestors, parents: [...parents, node]})).reverse().forEach((child) => pending.push(child));
+        }
+      }
+      locales = [...foundLocales];
+    }
+    const PALETTES = [['#edf3ff', '#4a77bf'], ['#f0ecff', '#7d62b1'], ['#fff0e6', '#b67543'], ['#e7f5ef', '#3c896d'], ['#fceaf0', '#b66b87']];
+    function resourceIcon(record) {
+      const name = local(record.node.name) || tr('unnamed');
+      const index = record.order % PALETTES.length;
+      const node = el('span', 'resource-icon', [...name].slice(0, name.includes(' ') ? 1 : 2).join(''));
+      node.style.setProperty('--tile-bg', PALETTES[index][0]);
+      node.style.setProperty('--tile-ink', PALETTES[index][1]);
+      node.setAttribute('aria-hidden', 'true');
+      return node;
+    }
+    function updateStaticCopy() {
+      document.querySelectorAll('[data-i18n]').forEach((node) => { node.textContent = tr(node.dataset.i18n); });
+      $('#search').placeholder = tr('searchPlaceholder');
+      for (const [selector, key] of [['#grid-view', 'grid'], ['#list-view', 'list'], ['#clear-search', 'clear'], ['#close-dialog', 'close'], ['#open-file', 'open']]) {
+        $(selector).setAttribute('aria-label', tr(key)); $(selector).title = tr(key);
+      }
+      document.documentElement.lang = locale || 'en';
+      document.documentElement.dir = /^(ar|fa|he|ur)(-|$)/i.test(locale) ? 'rtl' : 'ltr';
+      const title = local(data.title) || tr('untitled');
+      document.title = title.replaceAll('\n', ' ') + ' — The Awesome List';
+      $('#collection-title').replaceChildren();
+      title.split('\n').forEach((line, index) => $('#collection-title').append(index ? el('span', '', line) : document.createTextNode(line)));
+      $('#collection-description').textContent = local(data.description);
+      $('#collection-description').hidden = !local(data.description);
+      $('#total-resources').textContent = records.length;
+      $('#total-collections').textContent = data.sections.length;
+      $('#total-languages').textContent = locales.length;
+      $('#collection-origin').textContent = sourceName ? tr('loaded', {name: sourceName}) : tr('embedded');
+      const select = $('#locale'); select.replaceChildren();
+      locales.forEach((code) => {
+        let label = code || 'Default';
+        if (code === 'en') label = 'English';
+        else if (code === 'zh-CN') label = '简体中文';
+        else if (code === 'zh-HK' || code === 'zh-TW') label = '繁體中文';
+        else { try { label = new Intl.DisplayNames([code], {type: 'language'}).of(code) || code; } catch {} }
+        const option = el('option', '', label); option.value = code; select.append(option);
+      });
+      select.value = locale;
+      select.closest('label').hidden = locales.length < 2;
+      $('#preview-rows').replaceChildren();
+      records.filter((record) => !record.parents.length).slice(0, 3).forEach((record) => {
+        const row = el('div', 'preview-row'), copy = el('div');
+        copy.append(el('strong', '', local(record.node.name) || tr('unnamed')), el('small', '', local(record.section.node.title) || tr('untitled')));
+        row.append(resourceIcon(record), copy, icon('external')); $('#preview-rows').append(row);
+      });
+      $('.hero-art').hidden = !records.length;
+    }
+    function renderCategories() {
+      const host = $('#categories'); host.replaceChildren();
+      const add = (id, name, count, depth, symbol) => {
+        const button = el('button', 'category' + (depth ? ' nested' : '')); button.type = 'button';
+        button.setAttribute('aria-pressed', String(category === id)); button.style.setProperty('--depth', depth);
+        button.append(icon(symbol), el('span', 'category-name', name), el('span', 'category-count', count));
+        button.addEventListener('click', () => {
+          category = id;
+          host.querySelectorAll('button').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+          renderResults();
+        });
+        host.append(button);
+      };
+      add('all', tr('all'), records.length, 0, 'grid');
+      const symbols = ['code', 'design', 'bolt', 'book'];
+      sections.forEach((section) => add(section.id, local(section.node.title) || tr('untitled'), records.filter((record) => record.ancestors.includes(section)).length, section.depth, section.depth ? 'branch' : symbols[data.sections.indexOf(section.node) % symbols.length]));
+    }
+    function persistSaved() {
+      try { localStorage.setItem('awesome-list:saved:v1', JSON.stringify([...saved])); return true; }
+      catch { storageAvailable = false; return false; }
+    }
+    function notify(message) {
+      clearTimeout(toastTimer); $('#toast').textContent = message; $('#toast').hidden = false;
+      toastTimer = setTimeout(() => { $('#toast').hidden = true; }, 3500);
+    }
+    function updateSavedCount() {
+      const count = records.filter((record) => saved.has(record.identity)).length;
+      $('#save-count').textContent = count; $('#save-count').hidden = !count;
+    }
+    function renderCard(record) {
+      const name = local(record.node.name) || tr('unnamed'), url = safeUrl(record.node.url);
+      const card = el('article', 'resource-card'), top = el('div', 'card-top'), text = el('div', 'card-text');
+      card.dataset.recordId = record.id;
+      const bookmark = el('button', 'bookmark'); bookmark.type = 'button';
+      const updateBookmark = () => {
+        bookmark.setAttribute('aria-pressed', String(saved.has(record.identity)));
+        bookmark.setAttribute('aria-label', tr(saved.has(record.identity) ? 'unsave' : 'save', {name}));
+        bookmark.title = bookmark.getAttribute('aria-label');
+      };
+      updateBookmark(); bookmark.append(icon('bookmark'));
+      bookmark.addEventListener('click', () => {
+        const removing = saved.has(record.identity);
+        if (removing) saved.delete(record.identity); else saved.add(record.identity);
+        const persisted = persistSaved(); updateBookmark(); updateSavedCount();
+        notify(persisted ? tr(removing ? 'unsavedToast' : 'savedToast') : tr('storageToast'));
+        if (savedOnly && removing) {
+          const cards = [...$('#results').querySelectorAll('.resource-card')];
+          const position = cards.indexOf(card); renderResults();
+          const buttons = $('#results').querySelectorAll('.bookmark');
+          (buttons[Math.min(position, buttons.length - 1)] || $('#results .subtle-button') || $('#saved-tab')).focus();
+        }
+      });
+      top.append(resourceIcon(record), bookmark);
+      if (record.parents.length) text.append(el('span', 'entry-path', record.parents.map((parent) => local(parent.name) || tr('unnamed')).join(' / ')));
+      const title = el('h4');
+      if (url) { const link = el('a', '', name); link.href = url; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.setAttribute('aria-label', tr('visit', {name})); title.append(link); }
+      else title.textContent = name;
+      text.append(title);
+      const description = local(record.node.description);
+      if (description) text.append(el('p', 'card-description', description));
+      const footer = el('div', 'card-footer');
+      footer.append(el('span', 'category-tag', local(record.section.node.title) || tr('untitled')));
+      if (url) {
+        const link = el('a', 'visit-link'); link.href = url; link.target = '_blank'; link.rel = 'noopener noreferrer';
+        link.setAttribute('aria-label', tr('visit', {name})); link.append(icon('external')); footer.append(link);
+      }
+      card.append(top, text, footer); return card;
+    }
+    function renderResults() {
+      const terms = query.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
+      let visible = records.filter((record) => {
+        if (category !== 'all' && !record.ancestors.some((section) => section.id === category)) return false;
+        if (savedOnly && !saved.has(record.identity)) return false;
+        const haystack = [local(record.node.name), local(record.node.description), record.node.url || '', ...record.ancestors.map((section) => local(section.node.title)), ...record.parents.map((parent) => local(parent.name))].join(' ').toLocaleLowerCase();
+        return terms.every((term) => haystack.includes(term));
+      });
+      if ($('#sort').value === 'az') visible.sort((a, b) => local(a.node.name).localeCompare(local(b.node.name)));
+      const selectedSection = sections.find((section) => section.id === category);
+      $('#results-title').textContent = query.trim() ? tr('searchTitle') : savedOnly ? tr('savedTitle') : selectedSection ? local(selectedSection.node.title) || tr('untitled') : tr('all');
+      $('#result-count').textContent = tr(savedOnly ? 'savedCount' : 'resultCount', {count: visible.length});
+      $('#clear-search').hidden = !query;
+      const host = $('#results'); host.replaceChildren();
+      const inCategory = (section) => category === 'all' || section.id === category || section.ancestors.some((parent) => parent.id === category);
+      const addSectionHeading = (section) => {
+        const heading = el('div', 'section-heading');
+        if (section.depth) heading.append(el('span', 'section-path', section.ancestors.map((parent) => local(parent.node.title) || tr('untitled')).join(' / ')));
+        heading.append(el('h3', '', local(section.node.title) || tr('untitled')));
+        if (local(section.node.description)) heading.append(el('p', '', local(section.node.description)));
+        host.append(heading);
+      };
+      if (!visible.length) {
+        // A section can be useful prose with no entries; keep that content visible.
+        if (!query.trim() && !savedOnly) sections.filter(inCategory).forEach(addSectionHeading);
+        const empty = el('div', 'empty');
+        empty.append(icon(savedOnly ? 'bookmark' : 'search'), el('h3', '', tr(savedOnly && !query && category === 'all' ? 'emptySavedTitle' : 'emptyTitle')), el('p', '', tr(savedOnly && !query && category === 'all' ? 'emptySavedText' : 'emptyText')));
+        const reset = el('button', 'subtle-button', tr('reset')); reset.type = 'button'; reset.addEventListener('click', () => { resetFilters(); $('#search').focus(); });
+        empty.append(reset); host.append(empty); return;
+      }
+      const addGrid = (items) => {
+        const grid = el('div', 'resource-grid' + (view === 'list' ? ' list-view' : ''));
+        items.forEach((record) => grid.append(renderCard(record))); host.append(grid);
+      };
+      if (query.trim() || savedOnly || $('#sort').value === 'az') { addGrid(visible); return; }
+      sections.forEach((section) => {
+        const items = visible.filter((record) => record.section === section);
+        if (!inCategory(section)) return;
+        addSectionHeading(section); if (items.length) addGrid(items);
+      });
+    }
+    function setSavedMode(value) {
+      savedOnly = value;
+      $('#discover-tab').setAttribute('aria-pressed', String(!value));
+      $('#saved-tab').setAttribute('aria-pressed', String(value));
+      renderResults();
+    }
+    function resetFilters() {
+      category = 'all'; query = ''; $('#search').value = ''; $('#sort').value = 'original';
+      setSavedMode(false); renderCategories();
+    }
+    function applyCollection(value, filename = '') {
+      validate(value); data = value; sourceName = filename; locale = data.defaultLocale;
+      category = 'all'; query = ''; $('#search').value = ''; $('#sort').value = 'original';
+      indexCollection(); updateStaticCopy(); renderCategories(); setSavedMode(false); updateSavedCount();
+      $('#load-error').hidden = true;
+    }
+    $('#locale').addEventListener('change', (event) => { locale = event.target.value; updateStaticCopy(); renderCategories(); renderResults(); });
+    $('#search').addEventListener('input', (event) => { query = event.target.value; renderResults(); });
+    $('#clear-search').addEventListener('click', () => { query = ''; $('#search').value = ''; renderResults(); $('#search').focus(); });
+    $('#sort').addEventListener('change', renderResults);
+    $('#discover-tab').addEventListener('click', () => { setSavedMode(false); $('#catalogue').scrollIntoView({block: 'start'}); });
+    $('#saved-tab').addEventListener('click', () => { setSavedMode(true); $('#catalogue').scrollIntoView({block: 'start'}); });
+    for (const mode of ['grid', 'list']) $('#' + mode + '-view').addEventListener('click', () => {
+      view = mode;
+      $('#grid-view').setAttribute('aria-pressed', String(mode === 'grid')); $('#list-view').setAttribute('aria-pressed', String(mode === 'list'));
+      renderResults();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === '/' && !event.metaKey && !event.ctrlKey && !event.altKey && !$('#about-dialog').open && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName) && !document.activeElement.isContentEditable) {
+        event.preventDefault(); $('#search').focus();
+      }
+    });
+    $('#about-button').addEventListener('click', () => $('#about-dialog').showModal());
+    $('#close-dialog').addEventListener('click', () => $('#about-dialog').close());
+    $('#about-dialog').addEventListener('click', (event) => {
+      if (event.target !== $('#about-dialog')) return;
+      const box = event.target.getBoundingClientRect();
+      if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) event.target.close();
+    });
+    $('#open-file').addEventListener('click', () => $('#file-input').click());
+    $('#dialog-open').addEventListener('click', () => { $('#about-dialog').close(); $('#file-input').click(); });
+    $('#file-input').addEventListener('change', async (event) => {
+      const file = event.target.files[0]; if (!file) return;
+      try {
+        if (file.size > 10 * 1024 * 1024) throw new Error(tr('tooLarge'));
+        const value = JSON.parse((await file.text()).replace(/^\uFEFF/, ''));
+        applyCollection(value, file.name); notify(tr('loadSuccess')); window.scrollTo({top: 0});
+      } catch (error) {
+        $('#load-error').textContent = tr('loadError') + (error instanceof SyntaxError ? tr('genericError') : error.message);
+        $('#load-error').hidden = false; $('#load-error').scrollIntoView({block: 'center'});
+      } finally { event.target.value = ''; }
+    });
+    try { applyCollection(JSON.parse($('#awesome-data').textContent)); }
+    catch (error) { $('#load-error').textContent = tr('loadError') + error.message; $('#load-error').hidden = false; }
+  </script>
+</body>
+</html>

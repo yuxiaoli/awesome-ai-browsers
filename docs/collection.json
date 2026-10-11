@@ -1,0 +1,349 @@
+{
+  "defaultLocale": "en",
+  "title": {
+    "en": "Browsers",
+    "zh-CN": "浏览器",
+    "zh-HK": "瀏覽器"
+  },
+  "sections": [
+    {
+      "title": {
+        "en": "browsers",
+        "zh-CN": "浏览器",
+        "zh-HK": "瀏覽器"
+      },
+      "description": {
+        "en": "Browser automation tools, MCP servers, and AI-powered browsers for agentic web workflows.",
+        "zh-CN": "面向 AI 智能体的浏览器自动化工具、MCP 服务器和 AI 驱动浏览器。",
+        "zh-HK": "面向 AI 智能體的瀏覽器自動化工具、MCP 伺服器及 AI 驅動瀏覽器。"
+      },
+      "entries": [
+        {
+          "name": {
+            "en": "chrome-devtools-mcp",
+            "zh-CN": "chrome-devtools-mcp",
+            "zh-HK": "chrome-devtools-mcp"
+          },
+          "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+          "description": {
+            "en": "Chrome DevTools for coding agents",
+            "zh-CN": "面向编程智能体的 Chrome DevTools",
+            "zh-HK": "為編程智能體提供的 Chrome DevTools"
+          }
+        },
+        {
+          "name": {
+            "en": "playwright-mcp",
+            "zh-CN": "playwright-mcp",
+            "zh-HK": "playwright-mcp"
+          },
+          "url": "https://github.com/microsoft/playwright-mcp",
+          "description": {
+            "en": "Playwright MCP server",
+            "zh-CN": "Playwright MCP 服务器",
+            "zh-HK": "Playwright MCP 伺服器"
+          }
+        },
+        {
+          "name": {
+            "en": "browser-use",
+            "zh-CN": "browser-use",
+            "zh-HK": "browser-use"
+          },
+          "url": "https://github.com/browser-use/browser-use",
+          "description": {
+            "en": "Agents that use the browser.",
+            "zh-CN": "使用浏览器的智能体。",
+            "zh-HK": "使用瀏覽器的智能體。"
+          }
+        },
+        {
+          "name": {
+            "en": "OpenAI Atlas",
+            "zh-CN": "OpenAI Atlas",
+            "zh-HK": "OpenAI Atlas"
+          },
+          "url": "",
+          "description": {
+            "en": "",
+            "zh-CN": "",
+            "zh-HK": ""
+          }
+        },
+        {
+          "name": {
+            "en": "steel-browser",
+            "zh-CN": "steel-browser",
+            "zh-HK": "steel-browser"
+          },
+          "url": "https://github.com/steel-dev/steel-browser",
+          "description": {
+            "en": "🔥 Open Source Browser API for AI Agents & Apps. Steel Browser is a batteries-included browser sandbox that lets you automate the web without worrying about infrastructure.",
+            "zh-CN": "🔥 面向 AI 智能体与应用的开源浏览器 API。Steel Browser 是一个开箱即用的浏览器沙箱，让你无需操心基础设施即可自动化网页。",
+            "zh-HK": "🔥 為 AI 智能體及應用而設的開源瀏覽器 API。Steel Browser 是一個開箱即用的瀏覽器沙盒，讓你無需擔心基礎設施即可自動化網頁。"
+          }
+        },
+        {
+          "name": {
+            "en": "stagehand",
+            "zh-CN": "stagehand",
+            "zh-HK": "stagehand"
+          },
+          "url": "https://github.com/browserbase/stagehand",
+          "description": {
+            "en": "The SDK to extract data and interact with any site on the web. Get started with Claude Code, Codex, Eve, Mastra, and more.",
+            "zh-CN": "用于提取数据并与网络上任何网站交互的 SDK。可搭配 Claude Code、Codex、Eve、Mastra 等使用。",
+            "zh-HK": "用於擷取資料並與網絡上任何網站互動的 SDK。可配合 Claude Code、Codex、Eve、Mastra 等使用。"
+          }
+        },
+        {
+          "name": {
+            "en": "skyvern",
+            "zh-CN": "skyvern",
+            "zh-HK": "skyvern"
+          },
+          "url": "https://github.com/Skyvern-AI/skyvern",
+          "description": {
+            "en": "Automate browser based workflows with AI",
+            "zh-CN": "使用 AI 自动化基于浏览器的工作流",
+            "zh-HK": "使用 AI 自動化基於瀏覽器的工作流程"
+          }
+        },
+        {
+          "name": {
+            "en": "nanobrowser",
+            "zh-CN": "nanobrowser",
+            "zh-HK": "nanobrowser"
+          },
+          "url": "https://github.com/nanobrowser/nanobrowser",
+          "description": {
+            "en": "Open-Source Chrome extension for AI-powered web automation. Run multi-agent workflows using your own LLM API key. Alternative to OpenAI Operator.",
+            "zh-CN": "用于 AI 驱动网页自动化的开源 Chrome 扩展。使用你自己的 LLM API 密钥运行多智能体工作流。OpenAI Operator 的替代品。",
+            "zh-HK": "用於 AI 驅動網頁自動化的開源 Chrome 擴充功能。使用你自己的 LLM API 金鑰執行多智能體工作流程。OpenAI Operator 的替代品。"
+          }
+        },
+        {
+          "name": {
+            "en": "computer-use-preview",
+            "zh-CN": "computer-use-preview",
+            "zh-HK": "computer-use-preview"
+          },
+          "url": "https://github.com/google-gemini/computer-use-preview",
+          "description": {
+            "en": "",
+            "zh-CN": "",
+            "zh-HK": ""
+          }
+        },
+        {
+          "name": {
+            "en": "browsernode",
+            "zh-CN": "browsernode",
+            "zh-HK": "browsernode"
+          },
+          "url": "https://github.com/lennybase/browsernode",
+          "description": {
+            "en": "🌐 Make websites accessible for AI agents. Automate tasks online with ease.",
+            "zh-CN": "🌐 让网站可供 AI 智能体访问。轻松自动化在线任务。",
+            "zh-HK": "🌐 讓網站可供 AI 智能體存取。輕鬆自動化線上任務。"
+          }
+        },
+        {
+          "name": {
+            "en": "glide",
+            "zh-CN": "glide",
+            "zh-HK": "glide"
+          },
+          "url": "https://github.com/glide-browser/glide",
+          "description": {
+            "en": "An extensible and keyboard-focused web browser",
+            "zh-CN": "一款可扩展且以键盘为核心的网页浏览器",
+            "zh-HK": "一款可擴充且以鍵盤為核心的網頁瀏覽器"
+          }
+        },
+        {
+          "name": {
+            "en": "Scrapling",
+            "zh-CN": "Scrapling",
+            "zh-HK": "Scrapling"
+          },
+          "url": "https://github.com/D4Vinci/Scrapling",
+          "description": {
+            "en": "🕷️ ️ An adaptive Web Scraping framework that handles everything from a single request to a full-scale crawl! Don't be shy, join here: https://discord.gg/EMgGbDceNQ",
+            "zh-CN": "🕷️ ️ 一个自适应的网页抓取框架，从单次请求到全量爬取一应俱全！别害羞，加入我们：https://discord.gg/EMgGbDceNQ",
+            "zh-HK": "🕷️ ️ 一個自適應的網頁擷取框架，由單次請求到全量爬取一應俱全！別害羞，加入我們：https://discord.gg/EMgGbDceNQ"
+          }
+        },
+        {
+          "name": {
+            "en": "BrowserOS",
+            "zh-CN": "BrowserOS",
+            "zh-HK": "BrowserOS"
+          },
+          "url": "https://github.com/browseros-ai/BrowserOS",
+          "description": {
+            "en": "🌐 The open-source Agentic browser; alternative to ChatGPT Atlas, Perplexity Comet, Dia.",
+            "zh-CN": "🌐 开源的智能体浏览器；ChatGPT Atlas、Perplexity Comet、Dia 的替代品。",
+            "zh-HK": "🌐 開源的智能體瀏覽器；ChatGPT Atlas、Perplexity Comet、Dia 的替代品。"
+          }
+        },
+        {
+          "name": {
+            "en": "agent-browser",
+            "zh-CN": "agent-browser",
+            "zh-HK": "agent-browser"
+          },
+          "url": "https://github.com/vercel-labs/agent-browser",
+          "description": {
+            "en": "Browser automation CLI for AI agents",
+            "zh-CN": "面向 AI 智能体的浏览器自动化 CLI",
+            "zh-HK": "為 AI 智能體而設的瀏覽器自動化 CLI"
+          }
+        },
+        {
+          "name": {
+            "en": "browser",
+            "zh-CN": "browser",
+            "zh-HK": "browser"
+          },
+          "url": "https://github.com/lightpanda-io/browser",
+          "description": {
+            "en": "Lightpanda: the headless browser designed for AI and automation",
+            "zh-CN": "Lightpanda：为 AI 与自动化而设计的无头浏览器",
+            "zh-HK": "Lightpanda：為 AI 與自動化而設計的無頭瀏覽器"
+          }
+        },
+        {
+          "name": {
+            "en": "bb-browser",
+            "zh-CN": "bb-browser",
+            "zh-HK": "bb-browser"
+          },
+          "url": "https://github.com/epiral/bb-browser",
+          "description": {
+            "en": "Your browser is the API. CLI + MCP server for AI agents to control Chrome with your login state.",
+            "zh-CN": "你的浏览器就是 API。为 AI 智能体提供 CLI + MCP 服务器，让其以你的登录状态控制 Chrome。",
+            "zh-HK": "你的瀏覽器就是 API。為 AI 智能體提供 CLI + MCP 伺服器，讓其以你的登入狀態控制 Chrome。"
+          }
+        },
+        {
+          "name": {
+            "en": "pinchtab",
+            "zh-CN": "pinchtab",
+            "zh-HK": "pinchtab"
+          },
+          "url": "https://github.com/pinchtab/pinchtab",
+          "description": {
+            "en": "High-performance browser automation bridge and multi-instance orchestrator with advanced stealth injection and real-time dashboard.",
+            "zh-CN": "高性能的浏览器自动化桥接与多实例编排器，具备高级隐身注入与实时仪表板。",
+            "zh-HK": "高效能的瀏覽器自動化橋接與多實例編排器，具備進階隱身注入與即時儀表板。"
+          }
+        },
+        {
+          "name": {
+            "en": "Browser Use CLI",
+            "zh-CN": "Browser Use CLI",
+            "zh-HK": "Browser Use CLI"
+          },
+          "url": "",
+          "description": {
+            "en": "",
+            "zh-CN": "",
+            "zh-HK": ""
+          }
+        },
+        {
+          "name": {
+            "en": "carbonyl",
+            "zh-CN": "carbonyl",
+            "zh-HK": "carbonyl"
+          },
+          "url": "https://github.com/fathyb/carbonyl",
+          "description": {
+            "en": "Chromium running inside your terminal",
+            "zh-CN": "在终端里运行的 Chromium",
+            "zh-HK": "在終端機裡運行的 Chromium"
+          }
+        },
+        {
+          "name": {
+            "en": "web-access",
+            "zh-CN": "web-access",
+            "zh-HK": "web-access"
+          },
+          "url": "https://github.com/eze-is/web-access",
+          "description": {
+            "en": "给 Claude Code 装上完整联网能力的 skill：三层通道调度 + 浏览器 CDP + 并行分治",
+            "zh-CN": "给 Claude Code 装上完整联网能力的 skill：三层通道调度 + 浏览器 CDP + 并行分治",
+            "zh-HK": "為 Claude Code 裝上完整聯網能力的 skill：三層通道調度 + 瀏覽器 CDP + 並行分治"
+          }
+        },
+        {
+          "name": {
+            "en": "browser-harness",
+            "zh-CN": "browser-harness",
+            "zh-HK": "browser-harness"
+          },
+          "url": "https://github.com/browser-use/browser-harness",
+          "description": {
+            "en": "Browser Harness | Self-healing harness that enables LLMs to complete any task.",
+            "zh-CN": "Browser Harness | 自愈式框架，让 LLM 能够完成任何任务。",
+            "zh-HK": "Browser Harness | 自癒式框架，讓 LLM 能夠完成任何任務。"
+          }
+        },
+        {
+          "name": {
+            "en": "playwriter",
+            "zh-CN": "playwriter",
+            "zh-HK": "playwriter"
+          },
+          "url": "https://github.com/remorses/playwriter",
+          "description": {
+            "en": "Chrome extension & CLI to let agents control your browser. Runs Playwright snippets in a stateful sandbox. Available as CLI or MCP",
+            "zh-CN": "让智能体控制你浏览器的 Chrome 扩展与 CLI。在有状态的沙箱中运行 Playwright 代码片段。可作为 CLI 或 MCP 使用。",
+            "zh-HK": "讓智能體控制你瀏覽器的 Chrome 擴充功能與 CLI。在有狀態的沙盒中執行 Playwright 程式碼片段。可作為 CLI 或 MCP 使用。"
+          }
+        },
+        {
+          "name": {
+            "en": "ladybird",
+            "zh-CN": "ladybird",
+            "zh-HK": "ladybird"
+          },
+          "url": "https://github.com/LadybirdBrowser/ladybird",
+          "description": {
+            "en": "Truly independent web browser",
+            "zh-CN": "真正独立的网页浏览器",
+            "zh-HK": "真正獨立的網頁瀏覽器"
+          }
+        },
+        {
+          "name": {
+            "en": "obscura",
+            "zh-CN": "obscura",
+            "zh-HK": "obscura"
+          },
+          "url": "https://github.com/h4ckf0r0day/obscura",
+          "description": {
+            "en": "The headless browser for AI agents and web scraping",
+            "zh-CN": "面向 AI 智能体和网页抓取的无头浏览器",
+            "zh-HK": "為 AI 智能體及網頁擷取而設的無頭瀏覽器"
+          }
+        },
+        {
+          "name": {
+            "en": "camofox-browser",
+            "zh-CN": "camofox-browser",
+            "zh-HK": "camofox-browser"
+          },
+          "url": "https://github.com/jo-inc/camofox-browser",
+          "description": {
+            "en": "Stealth headless browser for AI agents — bypass Cloudflare, bot detection, and anti-scraping. Drop-in Puppeteer/Playwright replacement.",
+            "zh-CN": "面向 AI 智能体的隐身无头浏览器 —— 绕过 Cloudflare、机器人检测与反抓取。可直接替换 Puppeteer/Playwright。",
+            "zh-HK": "為 AI 智能體而設的隱身無頭瀏覽器 —— 繞過 Cloudflare、機器人偵測與反擷取。可直接替換 Puppeteer/Playwright。"
+          }
+        }
+      ]
+    }
+  ]
+}
