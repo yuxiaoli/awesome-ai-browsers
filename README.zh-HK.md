@@ -1,6 +1,6 @@
 # 瀏覽器
 
-<a href="https://awesome.re"><img src="assets/badges/awesome-badge-flat.svg" alt="Awesome" align="middle"></a> <img src="assets/badges/cmiri-badge.svg" alt="CMIRI" align="middle"> <img src="assets/badges/vector-index-badge.svg" alt="Vector Index" align="middle">
+<a href="https://awesome.re"><img src="assets/badges/awesome-badge-flat.svg" alt="Awesome" height="20" align="middle"></a> <img src="assets/badges/cmiri-badge-flat.svg" alt="CMIRI" height="20" align="middle"> <img src="assets/badges/vector-index-badge-flat.svg" alt="Vector Index" height="20" align="middle">
 
 [English](README.en.md) | [简体中文](README.zh-CN.md) | **繁體中文**
 
