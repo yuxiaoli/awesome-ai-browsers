@@ -1,6 +1,6 @@
 # Browsers
 
-[![Awesome](assets/badges/awesome-badge-flat.svg)](https://awesome.re) ![CMIRI](assets/badges/cmiri-badge.svg) ![Vector Index](assets/badges/vector-index-badge.svg)
+<a href="https://awesome.re"><img src="assets/badges/awesome-badge-flat.svg" alt="Awesome" align="middle"></a> <img src="assets/badges/cmiri-badge.svg" alt="CMIRI" align="middle"> <img src="assets/badges/vector-index-badge.svg" alt="Vector Index" align="middle">
 
 **English** | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-HK.md)
 
