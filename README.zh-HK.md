@@ -1,6 +1,6 @@
 # 瀏覽器
 
-<p align="center"><a href="https://awesome.re"><img src="https://awesome.re/badge-flat2.svg" alt="Awesome"></a></p>
+[![Awesome](assets/badges/awesome-badge-flat.svg)](https://awesome.re) ![CMIRI](assets/badges/cmiri-badge.svg) ![Vector Index](assets/badges/vector-index-badge.svg)
 
 [English](README.en.md) | [简体中文](README.zh-CN.md) | **繁體中文**
 
