@@ -59,3 +59,4 @@
 - [DeerFlow](https://github.com/bytedance/deer-flow) - 智能體運行框架，提供可選的 Playwright 瀏覽器控制，並在對話中維持瀏覽器會話，以瀏覽頁面及完成多步驟網頁工作流程。
 - [oh-my-pi](https://github.com/can1357/oh-my-pi) - 內置 Chromium 及 Electron 瀏覽器控制能力的編程智能體，並提供 Chrome 擴充功能，讓智能體操作現有分頁。
 - [AiToEarn](https://github.com/yikart/AiToEarn) - 內容營銷智能體平台，透過瀏覽器擴充功能自動執行社交平台互動，並生成 AI 留言回覆。
+- [agent-qa](https://vostride.com) - 透過 CLI、本機儀表板或 MCP 執行自然語言網頁與流動端 QA，具備持久化 memidex 記憶、經驗證的自我改進及步驟／截圖證據。FSL-1.1-ALv2，模型費用另計。

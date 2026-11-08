@@ -59,3 +59,4 @@ Broader agent platforms with substantial documented browser-control features for
 - [DeerFlow](https://github.com/bytedance/deer-flow) - An agent harness with optional Playwright browser control and persistent conversation sessions for navigating pages and completing multi-step web workflows.
 - [oh-my-pi](https://github.com/can1357/oh-my-pi) - A coding agent with built-in browser control for Chromium and Electron, including a Chrome extension that lets the agent operate existing tabs.
 - [AiToEarn](https://github.com/yikart/AiToEarn) - A content-marketing agent platform whose browser extension automates social-platform interactions and generates AI comment replies.
+- [agent-qa](https://vostride.com) - Natural-language web and mobile QA via CLI, local dashboard or MCP, with persistent memidex memory, validated self-improvement and recorded steps/screenshots. FSL-1.1-ALv2; model costs separate.
