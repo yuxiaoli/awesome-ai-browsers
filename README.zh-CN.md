@@ -59,3 +59,4 @@
 - [DeerFlow](https://github.com/bytedance/deer-flow) - 智能体运行框架，提供可选的 Playwright 浏览器控制，并在对话中保持浏览器会话，以浏览页面和完成多步骤网页工作流。
 - [oh-my-pi](https://github.com/can1357/oh-my-pi) - 内置 Chromium 和 Electron 浏览器控制能力的编程智能体，并提供 Chrome 扩展，让智能体操作现有标签页。
 - [AiToEarn](https://github.com/yikart/AiToEarn) - 内容营销智能体平台，通过浏览器扩展自动执行社交平台交互，并生成 AI 评论回复。
+- [agent-qa](https://vostride.com) - 通过 CLI、本地仪表板或 MCP 执行自然语言网页与移动端 QA，具备持久化 memidex 记忆、经验证的自我改进和步骤/截图证据。FSL-1.1-ALv2，模型费用另计。

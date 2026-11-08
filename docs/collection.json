@@ -404,6 +404,19 @@
             "zh-CN": "内容营销智能体平台，通过浏览器扩展自动执行社交平台交互，并生成 AI 评论回复。",
             "zh-HK": "內容營銷智能體平台，透過瀏覽器擴充功能自動執行社交平台互動，並生成 AI 留言回覆。"
           }
+        },
+        {
+          "name": {
+            "en": "agent-qa",
+            "zh-CN": "agent-qa",
+            "zh-HK": "agent-qa"
+          },
+          "url": "https://vostride.com",
+          "description": {
+            "en": "Natural-language web and mobile QA via CLI, local dashboard or MCP, with persistent memidex memory, validated self-improvement and recorded steps/screenshots. FSL-1.1-ALv2; model costs separate.",
+            "zh-CN": "通过 CLI、本地仪表板或 MCP 执行自然语言网页与移动端 QA，具备持久化 memidex 记忆、经验证的自我改进和步骤/截图证据。FSL-1.1-ALv2，模型费用另计。",
+            "zh-HK": "透過 CLI、本機儀表板或 MCP 執行自然語言網頁與流動端 QA，具備持久化 memidex 記憶、經驗證的自我改進及步驟／截圖證據。FSL-1.1-ALv2，模型費用另計。"
+          }
         }
       ]
     }
